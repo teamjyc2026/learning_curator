@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>융합형 사고 자가진단 체크리스트</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+  :root{
+    --bg:#F4F6F9; --card:#FFFFFF; --ink:#1B2330; --sub:#6B7480; --line:#E6E9EE;
+    --s1:#2E7CF6; --s2:#16A37B; --s3:#A855F7; --s4:#F59E0B; --s5:#EF4444;
+    --sans:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding:24px 16px 120px;}
+  .wrap{max-width:780px;margin:0 auto;}
+
+  /* header */
+  header{margin:8px 4px 22px;}
+  .eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.14em;color:var(--s1);}
+  h1{font-size:clamp(1.6rem,5vw,2.3rem);font-weight:800;margin:.25em 0 .35em;word-break:keep-all;}
+  .lead{color:var(--sub);font-size:clamp(.95rem,2.6vw,1.05rem);word-break:keep-all;}
+  .note{margin-top:14px;background:#EEF4FF;border:1px solid #D7E5FF;color:#274690;
+    border-radius:12px;padding:12px 14px;font-size:.9rem;word-break:keep-all;}
+
+  /* signal cards */
+  .sig{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 18px 8px;margin:14px 0;border-left:6px solid var(--c);
+    box-shadow:0 1px 2px rgba(20,30,50,.04);}
+  .sig-head{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+  .num{flex:none;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;
+    justify-content:center;font-weight:800;color:#fff;background:var(--c);font-size:1.05rem;}
+  .sig-title{font-size:clamp(1.05rem,3vw,1.3rem);font-weight:800;}
+  .sig-en{color:var(--sub);font-weight:600;font-size:.82rem;letter-spacing:.02em;}
+  .sig-desc{color:var(--sub);font-size:.9rem;margin:2px 0 12px;word-break:keep-all;}
+
+  .q{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line);
+    flex-wrap:wrap;}
+  .q-text{flex:1 1 60%;min-width:200px;font-size:clamp(.92rem,2.5vw,1rem);word-break:keep-all;}
+  .opts{display:flex;gap:6px;flex:0 0 auto;}
+  .opt{border:1.5px solid var(--line);background:#fff;border-radius:999px;
+    padding:7px 13px;font-size:.85rem;font-weight:600;color:var(--sub);cursor:pointer;
+    transition:all .15s ease;white-space:nowrap;}
+  .opt:hover{border-color:var(--c);color:var(--c);}
+  .opt[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff;}
+  .opt:focus-visible{outline:2px solid var(--c);outline-offset:2px;}
+
+  /* sticky action */
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;z-index:20;}
+  .bar-in{max-width:780px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+  .prog{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .prog>span{display:block;height:100%;width:0;background:var(--s1);transition:width .3s ease;}
+  .progtxt{font-size:.82rem;color:var(--sub);min-width:4.5em;text-align:right;}
+  .cta{border:none;border-radius:12px;background:var(--s1);color:#fff;font-weight:800;
+    font-size:1rem;padding:12px 20px;cursor:pointer;font-family:inherit;transition:opacity .2s,transform .1s;}
+  .cta:disabled{opacity:.4;cursor:not-allowed;}
+  .cta:not(:disabled):active{transform:scale(.97);}
+
+  /* result */
+  #result{display:none;margin-top:22px;}
+  #result.show{display:block;animation:fade .4s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:14px;}
+  .rcard h2{font-size:1.3rem;font-weight:800;margin-bottom:4px;}
+  .rcard .summary{color:var(--sub);font-size:.95rem;word-break:keep-all;}
+  .bars{margin-top:6px;}
+  .brow{display:flex;align-items:center;gap:12px;padding:9px 0;}
+  .blabel{flex:0 0 38%;font-weight:700;font-size:.92rem;display:flex;align-items:center;gap:8px;}
+  .bdot{width:12px;height:12px;border-radius:3px;background:var(--c);flex:none;}
+  .btrack{flex:1;height:12px;background:var(--line);border-radius:6px;overflow:hidden;}
+  .bfill{height:100%;width:0;background:var(--c);border-radius:6px;transition:width .7s cubic-bezier(.2,.8,.2,1);}
+  .bstate{flex:0 0 4.5em;text-align:right;font-size:.82rem;font-weight:700;color:var(--c);}
+
+  .reads{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:560px){.reads{grid-template-columns:1fr;}}
+  .read{border-radius:12px;padding:14px;border:1px solid var(--line);}
+  .read .k{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--sub);margin-bottom:4px;}
+  .read .v{font-weight:800;font-size:1.05rem;}
+  .step{background:#FFF7ED;border:1px solid #FCD9A8;border-radius:12px;padding:16px;margin-top:14px;}
+  .step .k{font-size:.8rem;font-weight:800;color:#B45309;letter-spacing:.04em;}
+  .step .v{margin-top:6px;font-size:1rem;font-weight:600;word-break:keep-all;}
+
+  .rbtns{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;}
+  .ghost{border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700;
+    border-radius:12px;padding:11px 18px;cursor:pointer;font-family:inherit;font-size:.95rem;}
+  .ghost:hover{border-color:var(--s1);color:var(--s1);}
+
+  footer{margin:26px 4px 0;color:var(--sub);font-size:.8rem;text-align:center;word-break:keep-all;}
+
+  /* print */
+  @media print{
+    body{background:#fff;padding:0;}
+    .bar,.rbtns,.note{display:none!important;}
+    .sig,.rcard{break-inside:avoid;box-shadow:none;}
+    .opt[aria-pressed="true"]{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    #result{display:block!important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">융합형 사고 · 자가진단</div>
+    <h1>나는 ‘연결하는 사람’일까?</h1>
+    <p class="lead">서로 다른 것을 이어 새로운 답을 만드는 힘 — 융합형 사고의 5가지 신호를 스스로 점검해 보세요. 각 문항에 솔직하게 답하면 됩니다.</p>
+    <div class="note">이 진단은 점수로 등급을 매기는 시험이 아닙니다. ‘무엇이 부족한가’가 아니라 <b>어떤 사고 습관이 이미 강하고, 어떤 쪽을 더 키우면 좋은지</b>를 보여주는 지도예요.</div>
+  </header>
+
+  <div id="quiz"></div>
+
+  <div id="result" aria-live="polite"></div>
+
+  <footer>융합형 사고 자가진단 · 학생용 · 결과는 기기에 저장되지 않습니다.</footer>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="prog"><span id="progFill"></span></div>
+    <div class="progtxt" id="progTxt">0 / 15</div>
+    <button class="cta" id="seeResult" disabled>결과 보기</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const SIGNALS = [
+    { key:'s1', color:'var(--s1)', ko:'강제 연결', en:'forced connection',
+      desc:'상관없어 보이는 것들을 억지로라도 이어보는 힘',
+      qs:[
+        '서로 상관없어 보이는 두 가지를 보면 “이 둘을 연결하면?” 하고 떠올린 적이 있다.',
+        '한 과목에서 배운 걸 다른 과목에서 “어, 이거 비슷하네” 하고 알아챈 적이 있다.',
+        '평소에 “이것과 저것의 공통점은 뭘까?”를 종종 생각한다.',
+      ],
+      step:'하루에 한 번, 눈앞의 전혀 다른 두 가지를 골라 억지로 연결해 한 문장 만들기 (예: “구름과 시험의 공통점은?”).' },
+    { key:'s2', color:'var(--s2)', ko:'지식의 전이', en:'transfer',
+      desc:'배운 것을 시험 밖 실제 문제에 끌어다 쓰는 힘',
+      qs:[
+        '시험을 위해서가 아니라, 배운 것을 실제 상황에 써본 적이 있다.',
+        '새로운 문제를 만나면 “전에 비슷한 걸 어디서 봤더라?”를 먼저 떠올린다.',
+        '수업에서 배운 개념으로 일상의 현상을 설명해본 적이 있다.',
+      ],
+      step:'오늘 배운 것 하나를 골라 “이걸 실생활 어디에 쓸 수 있을까?”를 한 문장으로 적어보기.' },
+    { key:'s3', color:'var(--s3)', ko:'다관점 종합', en:'synthesis',
+      desc:'상충하는 관점을 함께 쥐고 내 자리를 잡는 힘',
+      qs:[
+        '의견이 갈리는 문제에서 양쪽 입장을 모두 이해해보려 한다.',
+        '“둘 다 맞을 수도 있다”는 생각을 해본 적이 있다.',
+        '내 생각과 다른 의견을 들으면 화내기보다 그 이유가 궁금해진다.',
+      ],
+      step:'뉴스나 토론 주제 하나를 골라, 내 생각과 ‘반대편 주장’을 각각 한 줄씩 정리해보기.' },
+    { key:'s4', color:'var(--s4)', ko:'비유적 추상화', en:'analogy',
+      desc:'핵심 구조를 뽑아 다른 것에 빗대 설명하는 힘',
+      qs:[
+        '어려운 내용을 친구에게 “이건 마치 ~같은 거야”라고 비유로 설명한 적이 있다.',
+        '복잡한 것을 보면 핵심만 뽑아 단순하게 정리하려 한다.',
+        '새 개념을 익힐 때 이미 아는 것에 빗대어 이해한다.',
+      ],
+      step:'최근 배운 개념 하나를 “한 문장 비유”로 바꿔 친구나 가족에게 설명해보기.' },
+    { key:'s5', color:'var(--s5)', ko:'자기주도적 탐구', en:'self-directed inquiry',
+      desc:'정답이 없을 때 멈추지 않고 스스로 길을 내는 힘',
+      qs:[
+        '정답이 없는 질문을 받아도 일단 내 나름의 가설을 세워본다.',
+        '틀리는 것을 크게 두려워하지 않고 일단 시도해본다.',
+        '궁금한 게 생기면 누가 시키지 않아도 스스로 찾아본다.',
+      ],
+      step:'문제를 풀거나 검색하기 전에 “내 예상은 ~이다”를 먼저 적고 시작하기.' },
+  ];
+  const OPTS = [['그렇다',2],['가끔',1],['아니다',0]];
+  const TOTAL = SIGNALS.length*3;
+  const answers = {}; // id -> value
+
+  const quiz = document.getElementById('quiz');
+  SIGNALS.forEach((s,si)=>{
+    const card=document.createElement('section');
+    card.className='sig';card.style.setProperty('--c',s.color);
+    let html=`<div class="sig-head"><div class="num">${si+1}</div>
+      <div><div class="sig-title">${s.ko} <span class="sig-en">${s.en}</span></div></div></div>
+      <div class="sig-desc">${s.desc}</div>`;
+    s.qs.forEach((q,qi)=>{
+      const id=s.key+'_'+qi;
+      html+=`<div class="q"><div class="q-text">${q}</div><div class="opts" role="group" aria-label="${q}">`+
+        OPTS.map(o=>`<button class="opt" type="button" data-id="${id}" data-v="${o[1]}" aria-pressed="false">${o[0]}</button>`).join('')+
+        `</div></div>`;
+    });
+    card.innerHTML=html;
+    quiz.appendChild(card);
+  });
+
+  const progFill=document.getElementById('progFill');
+  const progTxt=document.getElementById('progTxt');
+  const seeBtn=document.getElementById('seeResult');
+
+  quiz.addEventListener('click',e=>{
+    const btn=e.target.closest('.opt');if(!btn)return;
+    const id=btn.dataset.id;
+    btn.parentNode.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    answers[id]=parseInt(btn.dataset.v,10);
+    const done=Object.keys(answers).length;
+    progFill.style.width=(done/TOTAL*100)+'%';
+    progTxt.textContent=done+' / '+TOTAL;
+    seeBtn.disabled = done<TOTAL;
+  });
+
+  function band(score){ // 0-6
+    if(score>=5) return ['강함','#16A37B'];
+    if(score>=3) return ['보통','#F59E0B'];
+    return ['키우는 중','#9AA3AE'];
+  }
+
+  seeBtn.addEventListener('click',()=>{
+    const scores=SIGNALS.map(s=>s.qs.reduce((a,_,qi)=>a+(answers[s.key+'_'+qi]||0),0));
+    const total=scores.reduce((a,b)=>a+b,0);
+    let topI=0, lowI=0;
+    scores.forEach((v,i)=>{ if(v>scores[topI])topI=i; if(v<scores[lowI])lowI=i; });
+
+    let overall;
+    if(total>=24) overall='연결하는 습관이 이미 몸에 배어 있어요. 이제는 깊이까지 더해 보세요 — 한 분야를 끝까지 파고든 위에 다른 분야를 잇는 거예요.';
+    else if(total>=15) overall='융합의 씨앗이 곳곳에 보여요. 강한 신호는 살리고, 약한 신호 하나만 의식적으로 키워도 사고가 훨씬 단단해집니다.';
+    else overall='아직은 지식이 칸칸이 나뉘어 있을 수 있어요. 괜찮아요 — 융합은 타고나는 게 아니라 ‘연결해보는 습관’으로 자랍니다. 아래 한 걸음부터 시작해 보세요.';
+
+    const bars=SIGNALS.map((s,i)=>{
+      const [st,sc]=band(scores[i]);
+      return `<div class="brow" style="--c:${s.color}">
+        <div class="blabel"><span class="bdot"></span>${s.ko}</div>
+        <div class="btrack"><div class="bfill" data-w="${scores[i]/6*100}"></div></div>
+        <div class="bstate" style="color:${sc}">${st}</div></div>`;
+    }).join('');
+
+    const res=document.getElementById('result');
+    res.innerHTML=`
+      <div class="rcard">
+        <h2>나의 융합 사고 지도</h2>
+        <p class="summary">${overall}</p>
+        <div class="bars">${bars}</div>
+      </div>
+      <div class="rcard">
+        <div class="reads">
+          <div class="read" style="border-color:${SIGNALS[topI].color}">
+            <div class="k">가장 강한 신호</div>
+            <div class="v" style="color:${SIGNALS[topI].color}">${SIGNALS[topI].ko}</div>
+          </div>
+          <div class="read" style="border-color:${SIGNALS[lowI].color}">
+            <div class="k">지금 키우면 좋은 신호</div>
+            <div class="v" style="color:${SIGNALS[lowI].color}">${SIGNALS[lowI].ko}</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="k">오늘의 한 걸음 — ${SIGNALS[lowI].ko}</div>
+          <div class="v">${SIGNALS[lowI].step}</div>
+        </div>
+        <div class="rbtns">
+          <button class="ghost" id="again">다시 진단하기</button>
+          <button class="ghost" id="printBtn">결과 인쇄 / PDF 저장</button>
+        </div>
+      </div>`;
+    res.classList.add('show');
+    requestAnimationFrame(()=>res.querySelectorAll('.bfill').forEach(b=>b.style.width=b.dataset.w+'%'));
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+
+    document.getElementById('again').onclick=()=>{
+      Object.keys(answers).forEach(k=>delete answers[k]);
+      document.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed','false'));
+      progFill.style.width='0';progTxt.textContent='0 / '+TOTAL;seeBtn.disabled=true;
+      res.classList.remove('show');res.innerHTML='';
+      window.scrollTo({top:0,behavior:'smooth'});
+    };
+    document.getElementById('printBtn').onclick=()=>window.print();
+  });
+})();
+</script>
+</body>
+</html>
