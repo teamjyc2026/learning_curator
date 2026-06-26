@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RichTextEditor } from "@/components/editor/rich-text-editor";
 
 export function PostForm({
   categories,
@@ -70,14 +71,9 @@ export function PostForm({
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="content">본문 (Markdown)</Label>
-        <Textarea
-          id="content"
-          name="content"
-          defaultValue={post?.content ?? ""}
-          rows={16}
-          className="font-mono text-sm"
-        />
+        <Label>본문</Label>
+        <RichTextEditor name="content" defaultValue={post?.content ?? ""} />
+        <input type="hidden" name="content_format" value="html" />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">

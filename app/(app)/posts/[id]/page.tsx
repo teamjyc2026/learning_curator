@@ -7,7 +7,7 @@ import {
   getMemberPostById,
   memberTypeLabel,
 } from "@/lib/queries/member-posts";
-import { Markdown } from "@/components/markdown";
+import { RichContent } from "@/components/rich-content";
 import { Badge } from "@/components/ui/badge";
 
 export default async function MemberPostDetailPage({
@@ -54,7 +54,7 @@ export default async function MemberPostDetailPage({
       </time>
 
       <div className="mt-8">
-        <Markdown>{post.content}</Markdown>
+        <RichContent content={post.content} format={post.content_format} />
       </div>
     </div>
   );

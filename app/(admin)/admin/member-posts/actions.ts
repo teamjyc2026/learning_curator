@@ -24,6 +24,7 @@ export async function saveMemberPostAction(
   if (!title) return { error: "제목을 입력해 주세요." };
 
   const content = String(formData.get("content") ?? "");
+  const content_format = String(formData.get("content_format") ?? "html");
   const audience = String(formData.get("audience") ?? "all") as MemberAudience;
   const post_type = String(
     formData.get("post_type") ?? "notice",
@@ -33,7 +34,16 @@ export async function saveMemberPostAction(
   const dueRaw = String(formData.get("due_at") ?? "").trim();
   const due_at = dueRaw ? new Date(dueRaw).toISOString() : null;
 
-  const base = { title, content, audience, post_type, status, pinned, due_at };
+  const base = {
+    title,
+    content,
+    content_format,
+    audience,
+    post_type,
+    status,
+    pinned,
+    due_at,
+  };
 
   if (id) {
     const { error } = await supabase

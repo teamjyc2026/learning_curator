@@ -9,7 +9,6 @@ import type { MemberPost } from "@/lib/queries/member-posts";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -17,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RichTextEditor } from "@/components/editor/rich-text-editor";
 
 export function MemberPostForm({ post }: { post?: MemberPost }) {
   const [state, action, pending] = useActionState<MemberPostFormState, FormData>(
@@ -77,14 +77,9 @@ export function MemberPostForm({ post }: { post?: MemberPost }) {
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="content">본문 (Markdown)</Label>
-        <Textarea
-          id="content"
-          name="content"
-          defaultValue={post?.content ?? ""}
-          rows={12}
-          className="font-mono text-sm"
-        />
+        <Label>본문</Label>
+        <RichTextEditor name="content" defaultValue={post?.content ?? ""} />
+        <input type="hidden" name="content_format" value="html" />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">

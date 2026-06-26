@@ -7,7 +7,7 @@ import {
   getPublishedPostBySlug,
 } from "@/lib/queries/posts";
 import { createClient } from "@/lib/supabase/server";
-import { Markdown } from "@/components/markdown";
+import { RichContent } from "@/components/rich-content";
 
 export async function generateMetadata({
   params,
@@ -81,7 +81,7 @@ export default async function PostDetailPage({
       ) : null}
 
       <div className="mt-8">
-        <Markdown>{post.content}</Markdown>
+        <RichContent content={post.content} format={post.content_format} />
       </div>
     </article>
   );

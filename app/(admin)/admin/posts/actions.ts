@@ -25,6 +25,7 @@ export async function savePostAction(
   const slug = ensureSlug(slugInput || title);
   const excerpt = String(formData.get("excerpt") ?? "").trim() || null;
   const content = String(formData.get("content") ?? "");
+  const content_format = String(formData.get("content_format") ?? "html");
   const categoryRaw = String(formData.get("category_id") ?? "").trim();
   const category_id = categoryRaw && categoryRaw !== "none" ? categoryRaw : null;
   const status = String(formData.get("status") ?? "draft") as PostStatus;
@@ -46,6 +47,7 @@ export async function savePostAction(
     slug,
     excerpt,
     content,
+    content_format,
     category_id,
     status,
     tags,
