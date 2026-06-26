@@ -3,7 +3,10 @@
 수학 학원용 공개 사이트 + 회원 웹앱. 레퍼런스: andywiki.co.kr.
 
 ## 스택
-- Next.js 16 (App Router, React 19, TS) · Tailwind v4 · shadcn/ui (style: **base-nova = Base UI 기반**)
+- Next.js 16 (App Router, React 19, TS) · Tailwind v4
+- **커스텀 UI 키트**(`components/ui/*`, Tailwind + CVA, shadcn 제거됨) + `@base-ui/react`는 **select/sheet에만** 사용
+- **Framer Motion**(`motion`) — `components/motion/motion-primitives.tsx`(FadeIn/Reveal/Stagger/HoverLift)
+- 테마: **인디고**(globals.css CSS 변수, primary `#4f46e5`, accent amber). 라이트/다크 토큰.
 - Supabase (Postgres + Auth + Storage + RLS), `@supabase/ssr`
 - TanStack Query (서버 상태) · Zustand (클라이언트 상태)
 
@@ -28,7 +31,8 @@
 - `supabase/migrations/` — 0001 web 스키마, 0002 기존 테이블 잠금, 0003 버킷 하드닝
 
 ## 패턴
-- shadcn(base-nova)는 `asChild` 대신 `render={<Link/>}`; Select는 Base UI(`onValueChange`는 `string|null`).
+- 커스텀 `Button`은 링크로 쓸 때 `render={<Link/>}` (cloneElement Slot, 기본 `type="button"`). `Select`는 @base-ui(`onValueChange`는 `string|null`).
+- 테마 변경은 `app/globals.css`의 `:root` CSS 변수만 수정하면 전체 반영(컴포넌트는 `bg-primary` 등 토큰 사용). shadcn/components.json 없음.
 - CMS는 Server Component + Server Action(`revalidatePath`) 중심.
 - 자가진단 게임: `components/games/fusion-self-check/` (Zustand store), 임베드: `components/games/embedded-game.tsx`.
 

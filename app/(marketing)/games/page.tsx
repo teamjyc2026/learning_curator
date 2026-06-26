@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Gamepad2 } from "lucide-react";
 import { getVisibleGames, visibilityLabel } from "@/lib/queries/games";
 import { PageHeader } from "@/components/layout/page-header";
+import { Stagger, StaggerItem, HoverLift } from "@/components/motion/motion-primitives";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = { title: "학습게임" };
@@ -23,12 +24,13 @@ export default async function GamesPage() {
             아직 등록된 게임이 없습니다.
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {games.map((g) => (
+              <StaggerItem key={g.id} className="h-full">
+              <HoverLift className="h-full">
               <Link
-                key={g.id}
                 href={`/games/${g.slug}`}
-                className="group flex flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50"
+                className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-colors hover:border-primary/50"
               >
                 {g.thumbnail_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -58,8 +60,10 @@ export default async function GamesPage() {
                   ) : null}
                 </div>
               </Link>
+              </HoverLift>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         )}
       </div>
     </>

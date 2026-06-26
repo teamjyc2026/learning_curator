@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GraduationCap } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { SocialLinks } from "./social-links";
 import { NewsletterForm } from "./newsletter-form";
@@ -8,8 +9,13 @@ export function SiteFooter() {
     <footer className="border-t bg-muted/30">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
         <div className="space-y-3">
-          <div className="font-heading text-lg font-extrabold">
-            {siteConfig.shortName}
+          <div className="flex items-center gap-2">
+            <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <GraduationCap className="size-5" />
+            </span>
+            <span className="font-heading text-lg font-extrabold">
+              {siteConfig.shortName}
+            </span>
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">
             {siteConfig.description}

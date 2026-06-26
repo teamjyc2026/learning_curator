@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { GraduationCap, Menu, ArrowRight } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,29 +16,61 @@ import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { SocialLinks } from "./social-links";
 
+function Logo() {
+  return (
+    <Link href="/" className="flex items-center gap-2">
+      <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+        <GraduationCap className="size-5" />
+      </span>
+      <span className="font-heading text-lg font-extrabold tracking-tight">
+        {siteConfig.shortName}
+      </span>
+    </Link>
+  );
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header
+      className={cn(
+        "sticky top-0 z-40 w-full transition-all duration-300",
+        scrolled
+          ? "border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+          : "border-b border-transparent bg-background",
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
-        <Link
-          href="/"
-          className="font-heading text-lg font-extrabold tracking-tight"
-        >
-          {siteConfig.shortName}
-        </Link>
+        <Logo />
 
         <nav className="ml-4 hidden items-center gap-0.5 md:flex">
-          {siteConfig.nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-            >
-              {item.title}
-            </Link>
-          ))}
+          {siteConfig.nav.map((item) => {
+            const active = pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  active
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                )}
+              >
+                {item.title}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
@@ -52,6 +85,7 @@ export function SiteHeader() {
           </Button>
           <Button size="sm" render={<Link href="/consultation" />}>
             상담예약
+            <ArrowRight className="size-3.5" />
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getCategories, getPublishedPosts } from "@/lib/queries/posts";
 import { PageHeader } from "@/components/layout/page-header";
+import { Stagger, StaggerItem, HoverLift } from "@/components/motion/motion-primitives";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "인사이트" };
@@ -55,14 +56,15 @@ export default async function InsightsPage({
             아직 발행된 글이 없습니다.
           </div>
         ) : (
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
               const cat = post.category_id ? catMap.get(post.category_id) : null;
               return (
+                <StaggerItem key={post.id} className="h-full">
+                <HoverLift className="h-full">
                 <Link
-                  key={post.id}
                   href={`/insights/${post.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50"
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-colors hover:border-primary/50"
                 >
                   {post.cover_image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -95,9 +97,11 @@ export default async function InsightsPage({
                     ) : null}
                   </div>
                 </Link>
+                </HoverLift>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
         )}
       </div>
     </>

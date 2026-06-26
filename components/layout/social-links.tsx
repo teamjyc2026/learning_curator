@@ -24,7 +24,7 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 const iconBtn =
-  "inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground";
+  "inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-primary-soft hover:text-primary";
 
 /**
  * 인스타그램 프로필 / 카카오 채널 링크 버튼.
