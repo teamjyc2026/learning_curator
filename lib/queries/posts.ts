@@ -5,11 +5,27 @@ import type { Tables } from "@/lib/supabase/database.types";
 export type Post = Tables<"posts">;
 export type Category = Tables<"post_categories">;
 
+/** 온라인수업 전용 카테고리 — 블로그 목록/칩에서는 제외하고 /classes에서만 사용 */
+export const ONLINE_CLASS_SLUG = "online-class";
+
+/** 전체 카테고리(관리자 작성 폼 셀렉트용 — 온라인수업 포함) */
 export async function getCategories(): Promise<Category[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from("post_categories")
     .select("*")
+    .order("sort_order")
+    .order("name");
+  return data ?? [];
+}
+
+/** 블로그 칩용 카테고리(온라인수업 제외) */
+export async function getBlogCategories(): Promise<Category[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("post_categories")
+    .select("*")
+    .neq("slug", ONLINE_CLASS_SLUG)
     .order("sort_order")
     .order("name");
   return data ?? [];
@@ -25,23 +41,24 @@ export async function getCategoryBySlug(slug: string): Promise<Category | null> 
   return data ?? null;
 }
 
-/** 공개 발행글 목록. categorySlug 지정 시 해당 카테고리만. */
+/** 공개 발행글 목록. categorySlug 지정 시 해당 카테고리만; 없으면 블로그 전체(온라인수업 제외). */
 export async function getPublishedPosts(categorySlug?: string): Promise<Post[]> {
   const supabase = await createClient();
-  let categoryId: string | null = null;
-  if (categorySlug) {
-    const cat = await getCategoryBySlug(categorySlug);
-    if (!cat) return [];
-    categoryId = cat.id;
-  }
-
   let query = supabase
     .from("posts")
     .select("*")
     .eq("status", "published")
     .order("published_at", { ascending: false });
 
-  if (categoryId) query = query.eq("category_id", categoryId);
+  if (categorySlug) {
+    const cat = await getCategoryBySlug(categorySlug);
+    if (!cat) return [];
+    query = query.eq("category_id", cat.id);
+  } else {
+    // 블로그 전체: 온라인수업 카테고리는 제외
+    const oc = await getCategoryBySlug(ONLINE_CLASS_SLUG);
+    if (oc) query = query.or(`category_id.is.null,category_id.neq.${oc.id}`);
+  }
 
   const { data } = await query;
   return data ?? [];

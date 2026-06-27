@@ -19,9 +19,11 @@ import { RichTextEditor } from "@/components/editor/rich-text-editor";
 export function PostForm({
   categories,
   post,
+  defaultCategoryId,
 }: {
   categories: Category[];
   post?: Post;
+  defaultCategoryId?: string;
 }) {
   const [state, action, pending] = useActionState<PostFormState, FormData>(
     savePostAction,
@@ -46,7 +48,7 @@ export function PostForm({
           <Label htmlFor="category_id">카테고리</Label>
           <Select
             name="category_id"
-            defaultValue={post?.category_id ?? "none"}
+            defaultValue={post?.category_id ?? defaultCategoryId ?? "none"}
             items={{
               none: "선택 안 함",
               ...Object.fromEntries(categories.map((c) => [c.id, c.name])),

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { getCategories, getPublishedPosts } from "@/lib/queries/posts";
+import { getBlogCategories, getPublishedPosts } from "@/lib/queries/posts";
 import { PageHeader } from "@/components/layout/page-header";
 import { AdminOnly } from "@/components/auth/session";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ export default async function InsightsPage({
 }) {
   const { topic } = await searchParams;
   const [categories, posts] = await Promise.all([
-    getCategories(),
+    getBlogCategories(),
     getPublishedPosts(topic),
   ]);
   const catMap = new Map(categories.map((c) => [c.id, c]));

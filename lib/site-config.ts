@@ -7,9 +7,10 @@ export const siteConfig = {
   // 상단/푸터 공통 네비게이션 — 핵심 4개 스펙(블로그/학부모/학생/수학게임) + 소개/상담예약
   nav: [
     { title: "블로그", href: "/insights" },
+    { title: "온라인수업", href: "/classes" },
+    { title: "수학게임", href: "/games" },
     { title: "학부모", href: "/parent" },
     { title: "학생", href: "/student" },
-    { title: "수학게임", href: "/games" },
     { title: "소개", href: "/about" },
     { title: "상담예약", href: "/consultation" },
   ],
