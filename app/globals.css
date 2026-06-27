@@ -46,6 +46,8 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     monospace;
   --radius: 0.375rem;
+  /* OS 다크모드에서도 UA 캔버스/스크롤바가 어둡게 칠해지는 것 방지(상단 검은 바 현상) */
+  color-scheme: light;
 
   --background: #ffffff;
   --foreground: #18181b;
@@ -116,7 +118,7 @@
     text-rendering: optimizeLegibility;
   }
   html {
-    @apply font-sans;
+    @apply bg-background font-sans;
     scroll-behavior: smooth;
   }
   ::selection {
