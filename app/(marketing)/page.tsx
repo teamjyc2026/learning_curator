@@ -82,14 +82,14 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="border-b">
-        <div className="mx-auto max-w-6xl px-4 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24 md:py-32">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-point">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-point sm:text-xs">
               Learning, Thinking, Growth
             </p>
           </FadeIn>
           <FadeIn delay={0.06}>
-            <h1 className="mt-5 max-w-3xl text-balance text-5xl font-extrabold leading-[1.08] tracking-tight md:text-7xl">
+            <h1 className="mt-4 max-w-3xl break-keep text-balance text-[2rem] font-extrabold leading-[1.15] tracking-tight sm:mt-5 sm:text-5xl sm:leading-[1.08] md:text-7xl">
               외우는 공부가 아닌,
               <br />
               연결하고 재구성하는 학습
@@ -214,7 +214,7 @@ export default function HomePage() {
       <section className="border-t">
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-20 md:flex-row md:items-center md:justify-between">
           <Reveal>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
+            <h2 className="break-keep text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl">
               지금, 학습 코칭을 시작하세요
             </h2>
             <p className="mt-3 break-keep text-muted-foreground">

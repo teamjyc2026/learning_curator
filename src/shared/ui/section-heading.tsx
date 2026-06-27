@@ -17,11 +17,13 @@ export function SectionHeading({
           {label}
         </p>
       ) : null}
-      <h2 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
+      <h2 className="mt-3 break-keep text-2xl font-extrabold tracking-tight md:text-3xl">
         {title}
       </h2>
       {description ? (
-        <p className="mt-2 max-w-2xl text-muted-foreground">{description}</p>
+        <p className="mt-2 max-w-2xl break-keep text-muted-foreground">
+          {description}
+        </p>
       ) : null}
     </div>
   );

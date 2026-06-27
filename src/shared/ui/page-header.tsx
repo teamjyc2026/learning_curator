@@ -11,18 +11,18 @@ export function PageHeader({
 }) {
   return (
     <div className="border-b">
-      <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16 md:py-24">
         <Reveal>
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-point">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-point sm:text-xs">
               {eyebrow}
             </p>
           ) : null}
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight md:text-6xl">
+          <h1 className="mt-4 break-keep text-3xl font-extrabold tracking-tight sm:text-4xl md:text-6xl">
             {title}
           </h1>
           {description ? (
-            <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-2xl break-keep text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
               {description}
             </p>
           ) : null}
