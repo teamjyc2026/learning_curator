@@ -68,16 +68,21 @@ export function GameForm({ game }: { game?: Game }) {
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="open_in">열기 방식</Label>
-            <Select name="open_in" defaultValue={game?.open_in ?? "iframe"}>
+            <Select name="open_in" defaultValue={game?.open_in ?? "newtab"}>
               <SelectTrigger id="open_in" className="min-w-36">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="newtab">새 탭(권장)</SelectItem>
                 <SelectItem value="iframe">페이지 안(iframe)</SelectItem>
-                <SelectItem value="newtab">새 탭</SelectItem>
               </SelectContent>
             </Select>
           </div>
+          <p className="text-xs text-muted-foreground sm:col-span-2">
+            ⚠️ Canva 등 일부 사이트는 보안정책(X-Frame-Options)으로 iframe 삽입을
+            차단합니다. 이 경우 “페이지 안(iframe)”을 선택하면 “연결을
+            거부했습니다”가 떠요 → <b>새 탭</b>으로 두세요.
+          </p>
         </div>
       ) : (
         <div className="space-y-1.5">
