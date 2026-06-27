@@ -17,6 +17,17 @@ export const siteConfig = {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
     kakao: process.env.NEXT_PUBLIC_KAKAO_CHANNEL_URL ?? "",
   },
+  // 블로그(인사이트) 교육단계별 카테고리 — 헤더 드롭다운/필터용 (web.post_categories와 slug 일치)
+  insightCategories: [
+    { title: "초등교육", slug: "elementary" },
+    { title: "중등교육", slug: "middle" },
+    { title: "고등교육", slug: "high" },
+    { title: "성인교육", slug: "adult" },
+    { title: "부모되기", slug: "parenting" },
+    { title: "청년기 학습", slug: "youth" },
+    { title: "중장년기 학습", slug: "middle-age" },
+    { title: "노년기 학습", slug: "senior" },
+  ],
 } as const;
 
 export type NavItem = (typeof siteConfig.nav)[number];

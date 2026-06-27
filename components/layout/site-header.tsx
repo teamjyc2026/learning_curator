@@ -168,17 +168,37 @@ export function SiteHeader({
         <nav className="ml-4 hidden items-center gap-0.5 md:flex">
           {siteConfig.nav.map((item) => {
             const active = pathname.startsWith(item.href);
+            const cls = cn(
+              "px-3 py-2 text-sm font-medium underline-offset-8 transition-colors",
+              active
+                ? "text-foreground underline decoration-2"
+                : "text-muted-foreground hover:text-foreground",
+            );
+
+            // 블로그: 교육단계별 카테고리 드롭다운
+            if (item.href === "/insights") {
+              return (
+                <div key={item.href} className="group relative">
+                  <Link href={item.href} className={cls}>
+                    {item.title}
+                  </Link>
+                  <div className="invisible absolute left-0 top-full z-50 w-40 -translate-y-1 rounded-lg border bg-popover p-1 opacity-0 shadow-md transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    {siteConfig.insightCategories.map((c) => (
+                      <Link
+                        key={c.slug}
+                        href={`/insights?topic=${c.slug}`}
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                      >
+                        {c.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "px-3 py-2 text-sm font-medium underline-offset-8 transition-colors",
-                  active
-                    ? "text-foreground underline decoration-2"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
-              >
+              <Link key={item.href} href={item.href} className={cls}>
                 {item.title}
               </Link>
             );
@@ -225,14 +245,27 @@ export function SiteHeader({
               </SheetHeader>
               <nav className="mt-2 flex flex-col gap-1 px-2">
                 {siteConfig.nav.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-2.5 text-base font-medium hover:bg-accent"
-                  >
-                    {item.title}
-                  </Link>
+                  <div key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-md px-3 py-2.5 text-base font-medium hover:bg-accent"
+                    >
+                      {item.title}
+                    </Link>
+                    {item.href === "/insights"
+                      ? siteConfig.insightCategories.map((c) => (
+                          <Link
+                            key={c.slug}
+                            href={`/insights?topic=${c.slug}`}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-md py-2 pl-7 pr-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                          >
+                            {c.title}
+                          </Link>
+                        ))
+                      : null}
+                  </div>
                 ))}
 
                 <div className="my-2 h-px bg-border" />
