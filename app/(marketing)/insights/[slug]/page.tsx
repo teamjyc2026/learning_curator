@@ -3,9 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Pencil } from "lucide-react";
 import { getPublishedPostBySlug } from "@/lib/queries/posts";
-import { isAdmin } from "@/lib/auth/roles";
 import { createClient } from "@/lib/supabase/server";
 import { RichContent } from "@/components/rich-content";
+import { AdminOnly } from "@/components/auth/session";
 import { Button } from "@/components/ui/button";
 
 export async function generateMetadata({
@@ -27,8 +27,6 @@ export default async function PostDetailPage({
   const { slug } = await params;
   const post = await getPublishedPostBySlug(slug);
   if (!post) notFound();
-
-  const admin = await isAdmin();
 
   // 카테고리 이름 조회(별도 — 임베드 미사용)
   let categoryName: string | null = null;
@@ -52,7 +50,7 @@ export default async function PostDetailPage({
           <ArrowLeft className="size-4" />
           인사이트 목록
         </Link>
-        {admin ? (
+        <AdminOnly>
           <Button
             size="sm"
             variant="outline"
@@ -61,7 +59,7 @@ export default async function PostDetailPage({
             <Pencil className="size-3.5" />
             수정
           </Button>
-        ) : null}
+        </AdminOnly>
       </div>
 
       <header className="mt-6">

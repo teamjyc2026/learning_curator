@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import { siteConfig } from "@/lib/site-config";
 import { logoutAction } from "@/app/(auth)/actions";
+import { useAuthSession } from "@/components/auth/session";
 import type { AppRole } from "@/lib/supabase/database.types";
 import { cn } from "@/lib/utils";
 import { SocialLinks } from "./social-links";
@@ -131,10 +132,18 @@ function UserMenu({ session }: { session: HeaderSession }) {
   );
 }
 
-export function SiteHeader({ session }: { session: HeaderSession | null }) {
+export function SiteHeader({
+  session: initialSession,
+}: {
+  session: HeaderSession | null;
+}) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  // 클라이언트에서 로그인 상태를 직접 읽어 로그인/로그아웃 시 헤더가 바로 갱신됨.
+  const clientSession = useAuthSession();
+  const session = clientSession === undefined ? initialSession : clientSession;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);

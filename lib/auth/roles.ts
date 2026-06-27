@@ -33,10 +33,14 @@ export async function getSessionContext(): Promise<SessionContext> {
     supabase.from("user_roles").select("role").eq("user_id", user.id),
   ]);
 
+  const roles = (roleRows ?? []).map((r) => r.role) as AppRole[];
+  // 관리자 여부는 profiles.is_admin 으로 분기
+  if (profile?.is_admin && !roles.includes("admin")) roles.push("admin");
+
   return {
     user,
     profile: profile ?? null,
-    roles: (roleRows ?? []).map((r) => r.role),
+    roles,
   };
 }
 

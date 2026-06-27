@@ -8,8 +8,8 @@ import {
   Plus,
 } from "lucide-react";
 import { getVisibleGames, visibilityLabel, type Game } from "@/lib/queries/games";
-import { isAdmin } from "@/lib/auth/roles";
 import { Button } from "@/components/ui/button";
+import { AdminOnly } from "@/components/auth/session";
 import { PageHeader } from "@/components/layout/page-header";
 import {
   Stagger,
@@ -68,7 +68,7 @@ function GameCard({ game }: { game: Game }) {
 }
 
 export default async function GamesPage() {
-  const [games, admin] = await Promise.all([getVisibleGames(), isAdmin()]);
+  const games = await getVisibleGames();
   const diagnostics = games.filter((g) => g.game_type === "internal");
   const playGames = games.filter((g) => g.game_type === "embed");
 
@@ -81,13 +81,13 @@ export default async function GamesPage() {
       />
 
       <div className="mx-auto max-w-6xl space-y-14 px-4 py-12">
-        {admin ? (
+        <AdminOnly>
           <div className="flex justify-end">
             <Button size="sm" render={<Link href="/admin/games/new" />}>
               <Plus className="size-4" />게임 추가
             </Button>
           </div>
-        ) : null}
+        </AdminOnly>
 
         {/* 자가진단 (게임과 분리) */}
         {diagnostics.length > 0 ? (
