@@ -62,32 +62,6 @@ export async function getBoardPosts(
   return withAuthors(data ?? []);
 }
 
-/** 내가 쓴 글(승인상태 무관) */
-export async function getMyMemberPosts(userId: string): Promise<MemberPost[]> {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("member_posts")
-    .select("*")
-    .eq("author_id", userId)
-    .order("created_at", { ascending: false });
-  return data ?? [];
-}
-
-/** 승인 대기 목록(관리자). audience 지정 시 해당 게시판만. */
-export async function getPendingMemberPosts(
-  audience?: MemberAudience,
-): Promise<MemberPostWithAuthor[]> {
-  const supabase = await createClient();
-  let q = supabase
-    .from("member_posts")
-    .select("*")
-    .eq("approval_status", "pending")
-    .order("created_at", { ascending: false });
-  if (audience) q = q.in("audience", [audience, "all"]);
-  const { data } = await q;
-  return withAuthors(data ?? []);
-}
-
 export async function getMemberPostById(id: string): Promise<MemberPost | null> {
   const supabase = await createClient();
   const { data } = await supabase

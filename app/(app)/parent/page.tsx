@@ -1,40 +1,25 @@
 import type { Metadata } from "next";
 import { getSessionContext } from "@/lib/auth/roles";
-import {
-  getBoardPosts,
-  getMyMemberPosts,
-  getPendingMemberPosts,
-} from "@/lib/queries/member-posts";
-import { MemberBoard } from "@/components/member/member-board";
+import { getBoardPosts } from "@/lib/queries/member-posts";
+import { MemberPostList } from "@/components/member/post-list";
 
 export const metadata: Metadata = { title: "학부모" };
 
 export default async function ParentHomePage() {
-  const ctx = await getSessionContext();
-  const isAdmin = ctx.roles.includes("admin");
-
-  const board = await getBoardPosts("parent");
-  const myPosts = ctx.user ? await getMyMemberPosts(ctx.user.id) : [];
-  const pending = isAdmin ? await getPendingMemberPosts("parent") : null;
+  const { profile } = await getSessionContext();
+  const posts = await getBoardPosts("parent");
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="text-2xl font-bold tracking-tight">
-        {ctx.profile?.nickname ?? "학부모"}님, 환영합니다
+        {profile?.nickname ?? "학부모"}님, 환영합니다
       </h1>
       <p className="mt-1 text-muted-foreground">
-        학부모 게시판입니다. 글을 남기면 관리자 승인 후 게시됩니다.
+        학원에서 전하는 공지·안내·자료입니다.
       </p>
 
       <div className="mt-8">
-        <MemberBoard
-          audience="parent"
-          board={board}
-          myPosts={myPosts}
-          pending={pending}
-          isAdmin={isAdmin}
-          userId={ctx.user?.id ?? null}
-        />
+        <MemberPostList posts={posts} emptyText="등록된 공지·자료가 없습니다." />
       </div>
     </div>
   );
