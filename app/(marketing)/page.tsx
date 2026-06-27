@@ -84,7 +84,7 @@ export default function HomePage() {
       <section className="border-b">
         <div className="mx-auto max-w-6xl px-4 py-24 md:py-32">
           <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-point">
               Learning, Thinking, Growth
             </p>
           </FadeIn>
@@ -159,7 +159,7 @@ export default function HomePage() {
                 <p className="mt-2 flex-1 break-keep text-sm leading-relaxed text-muted-foreground">
                   {f.desc}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold">
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-point">
                   바로가기
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>

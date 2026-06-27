@@ -13,7 +13,7 @@ export function SectionHeading({
   return (
     <div className="border-b pb-5">
       {label ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-point">
           {label}
         </p>
       ) : null}

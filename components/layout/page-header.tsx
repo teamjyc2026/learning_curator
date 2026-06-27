@@ -14,7 +14,7 @@ export function PageHeader({
       <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
         <Reveal>
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-point">
               {eyebrow}
             </p>
           ) : null}

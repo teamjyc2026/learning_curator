@@ -15,6 +15,8 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-soft: var(--primary-soft);
+  --color-point: var(--point);
+  --color-point-foreground: var(--point-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -49,63 +51,73 @@
   /* OS 다크모드에서도 UA 캔버스/스크롤바가 어둡게 칠해지는 것 방지(상단 검은 바 현상) */
   color-scheme: light;
 
-  --background: #ffffff;
-  --foreground: #18181b;
+  /* 브랜드 컬러 시스템 — Learning Curator
+     MAIN Deep Sage Navy #2A3A56 · SUB Warm Peach Sand #FCEADE
+     POINT Deep Coastal Teal #299CAE · TEXT Slate Blue Gray #64748B
+     BG Pristine Ivory #FAF8F5 */
+  --background: #faf8f5;
+  --foreground: #2a3a56;
   --card: #ffffff;
-  --card-foreground: #18181b;
+  --card-foreground: #2a3a56;
   --popover: #ffffff;
-  --popover-foreground: #18181b;
+  --popover-foreground: #2a3a56;
 
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --primary-soft: #eef0ff;
+  --primary: #2a3a56; /* MAIN — 채움 CTA */
+  --primary-foreground: #faf8f5;
+  --primary-soft: #fceade; /* SUB Warm Peach Sand */
 
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
-  --muted: #fafafa;
-  --muted-foreground: #71717a;
-  --accent: #f4f4f5;
-  --accent-foreground: #18181b;
+  --point: #299cae; /* POINT — 링크/액티브/포커스 */
+  --point-foreground: #ffffff;
 
-  --highlight: #f59e0b;
+  --secondary: #f1ece5;
+  --secondary-foreground: #2a3a56;
+  --muted: #f4f0ea;
+  --muted-foreground: #64748b; /* TEXT Slate Blue Gray — 본문/보조 */
+  --accent: #f1ece5;
+  --accent-foreground: #2a3a56;
+
+  --highlight: #299cae;
   --highlight-foreground: #ffffff;
 
-  --destructive: #e5484d;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #ececec;
-  --input: #e4e4e7;
-  --ring: #4f46e5;
+  --border: #e9e2d7;
+  --input: #e2dacb;
+  --ring: #299cae;
 }
 
 .dark {
-  --background: #0d0f14;
-  --foreground: #f5f6fa;
-  --card: #14171e;
-  --card-foreground: #f5f6fa;
-  --popover: #14171e;
-  --popover-foreground: #f5f6fa;
+  --background: #1a2233;
+  --foreground: #f3f1ec;
+  --card: #222c40;
+  --card-foreground: #f3f1ec;
+  --popover: #222c40;
+  --popover-foreground: #f3f1ec;
 
-  --primary: #7c79f0;
-  --primary-foreground: #0d0f14;
-  --primary-soft: #1e2030;
+  --primary: #e9e2d7;
+  --primary-foreground: #1a2233;
+  --primary-soft: #2c3850;
 
-  --secondary: #1b1f29;
-  --secondary-foreground: #f5f6fa;
-  --muted: #1b1f29;
-  --muted-foreground: #9aa0ad;
-  --accent: #20242f;
-  --accent-foreground: #f5f6fa;
+  --point: #4cb8c9;
+  --point-foreground: #08151b;
 
-  --highlight: #f59e0b;
-  --highlight-foreground: #0d0f14;
+  --secondary: #28324a;
+  --secondary-foreground: #f3f1ec;
+  --muted: #28324a;
+  --muted-foreground: #9aa6bd;
+  --accent: #2c3850;
+  --accent-foreground: #f3f1ec;
+
+  --highlight: #4cb8c9;
+  --highlight-foreground: #08151b;
 
   --destructive: #ff6166;
   --destructive-foreground: #0d0f14;
 
-  --border: #262a34;
-  --input: #2b2f3a;
-  --ring: #7c79f0;
+  --border: #313d57;
+  --input: #36425e;
+  --ring: #4cb8c9;
 }
 
 @layer base {
@@ -122,11 +134,12 @@
     scroll-behavior: smooth;
   }
   ::selection {
-    background: color-mix(in oklch, var(--primary) 22%, transparent);
+    background: color-mix(in oklch, var(--point) 24%, transparent);
   }
-  /* Typography(prose) 인디고 톤 */
+  /* Typography(prose) — 본문 슬레이트, 링크 틸, 제목 네이비 */
   .prose {
-    --tw-prose-links: var(--primary);
+    --tw-prose-body: var(--muted-foreground);
+    --tw-prose-links: var(--point);
     --tw-prose-headings: var(--foreground);
     --tw-prose-bold: var(--foreground);
   }
