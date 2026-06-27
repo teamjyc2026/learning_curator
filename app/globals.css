@@ -45,25 +45,25 @@
     "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     monospace;
-  --radius: 0.5rem;
+  --radius: 0.375rem;
 
   --background: #ffffff;
-  --foreground: #15181f;
+  --foreground: #18181b;
   --card: #ffffff;
-  --card-foreground: #15181f;
+  --card-foreground: #18181b;
   --popover: #ffffff;
-  --popover-foreground: #15181f;
+  --popover-foreground: #18181b;
 
   --primary: #4f46e5;
   --primary-foreground: #ffffff;
   --primary-soft: #eef0ff;
 
-  --secondary: #f4f5f9;
-  --secondary-foreground: #15181f;
-  --muted: #f5f6fa;
-  --muted-foreground: #6b7180;
-  --accent: #eef0f6;
-  --accent-foreground: #15181f;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #fafafa;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
 
   --highlight: #f59e0b;
   --highlight-foreground: #ffffff;
@@ -71,8 +71,8 @@
   --destructive: #e5484d;
   --destructive-foreground: #ffffff;
 
-  --border: #e7e8ee;
-  --input: #e7e8ee;
+  --border: #ececec;
+  --input: #e4e4e7;
   --ring: #4f46e5;
 }
 

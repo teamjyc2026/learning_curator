@@ -74,7 +74,7 @@ export default async function InsightsPage({
                 <HoverLift className="h-full">
                 <Link
                   href={`/insights/${post.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-colors hover:border-primary/50"
+                  className="group flex h-full flex-col overflow-hidden rounded-lg border bg-card transition-colors hover:border-foreground/30"
                 >
                   {post.cover_image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element

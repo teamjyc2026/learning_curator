@@ -173,10 +173,10 @@ export function SiteHeader({
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "px-3 py-2 text-sm font-medium underline-offset-8 transition-colors",
                   active
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                    ? "text-foreground underline decoration-2"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.title}

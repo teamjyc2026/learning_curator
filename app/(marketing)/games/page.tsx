@@ -24,7 +24,7 @@ export const metadata: Metadata = { title: "학습 게임 · 자가진단" };
 function GameCard({ game }: { game: Game }) {
   const newtab = game.game_type === "embed" && game.open_in === "newtab";
   const inner = (
-    <div className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-colors hover:border-primary/50">
+    <div className="group flex h-full flex-col overflow-hidden rounded-lg border bg-card transition-colors hover:border-foreground/30">
       {game.thumbnail_url ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
