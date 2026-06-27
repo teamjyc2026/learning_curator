@@ -1,55 +1,41 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Plus } from "lucide-react";
 import { getSessionContext } from "@/lib/auth/roles";
-import { getVisibleMemberPosts } from "@/lib/queries/member-posts";
-import { MemberPostList } from "@/components/member/member-post-list";
-import { Button } from "@/components/ui/button";
+import {
+  getBoardPosts,
+  getMyMemberPosts,
+  getPendingMemberPosts,
+} from "@/lib/queries/member-posts";
+import { MemberBoard } from "@/components/member/member-board";
 
 export const metadata: Metadata = { title: "학부모" };
 
 export default async function ParentHomePage() {
-  const [{ profile, roles }, posts] = await Promise.all([
-    getSessionContext(),
-    getVisibleMemberPosts(),
-  ]);
-  const admin = roles.includes("admin");
+  const ctx = await getSessionContext();
+  const isAdmin = ctx.roles.includes("admin");
+
+  const board = await getBoardPosts("parent");
+  const myPosts = ctx.user ? await getMyMemberPosts(ctx.user.id) : [];
+  const pending = isAdmin ? await getPendingMemberPosts("parent") : null;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">
-            {profile?.nickname ?? "학부모"}님, 환영합니다
-          </h1>
-          <p className="mt-1 text-muted-foreground">
-            학부모 전용 공지·안내·자료입니다.
-          </p>
-        </div>
-        {admin ? (
-          <Button size="sm" render={<Link href="/admin/member-posts/new" />}>
-            <Plus className="size-4" />게시글 작성
-          </Button>
-        ) : null}
+      <h1 className="text-2xl font-bold tracking-tight">
+        {ctx.profile?.nickname ?? "학부모"}님, 환영합니다
+      </h1>
+      <p className="mt-1 text-muted-foreground">
+        학부모 게시판입니다. 글을 남기면 관리자 승인 후 게시됩니다.
+      </p>
+
+      <div className="mt-8">
+        <MemberBoard
+          audience="parent"
+          board={board}
+          myPosts={myPosts}
+          pending={pending}
+          isAdmin={isAdmin}
+          userId={ctx.user?.id ?? null}
+        />
       </div>
-
-      <section className="mt-8 space-y-3">
-        <h2 className="text-lg font-bold">공지 · 안내</h2>
-        <MemberPostList
-          posts={posts}
-          filterTypes={["notice", "guide"]}
-          emptyText="등록된 공지가 없습니다."
-        />
-      </section>
-
-      <section className="mt-8 space-y-3">
-        <h2 className="text-lg font-bold">학습 자료</h2>
-        <MemberPostList
-          posts={posts}
-          filterTypes={["resource"]}
-          emptyText="등록된 자료가 없습니다."
-        />
-      </section>
     </div>
   );
 }

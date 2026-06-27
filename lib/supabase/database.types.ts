@@ -87,6 +87,7 @@ type MemberPostRow = {
   audience: MemberAudience;
   post_type: MemberPostType;
   status: PostStatus;
+  approval_status: string;
   pinned: boolean;
   due_at: string | null;
   author_id: string | null;

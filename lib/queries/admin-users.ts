@@ -23,14 +23,3 @@ export async function getUsersWithRoles(): Promise<ProfileWithRoles[]> {
 
   return (profiles ?? []).map((p) => ({ ...p, roles: map.get(p.id) ?? [] }));
 }
-
-export async function getSubscribers(): Promise<
-  Tables<"newsletter_subscribers">[]
-> {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("newsletter_subscribers")
-    .select("*")
-    .order("created_at", { ascending: false });
-  return data ?? [];
-}

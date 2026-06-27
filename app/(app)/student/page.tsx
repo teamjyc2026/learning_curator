@@ -1,36 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Gamepad2, History, Plus } from "lucide-react";
+import { Gamepad2, History } from "lucide-react";
 import { getSessionContext } from "@/lib/auth/roles";
-import { getVisibleMemberPosts } from "@/lib/queries/member-posts";
-import { MemberPostList } from "@/components/member/member-post-list";
-import { Button } from "@/components/ui/button";
+import {
+  getBoardPosts,
+  getMyMemberPosts,
+  getPendingMemberPosts,
+} from "@/lib/queries/member-posts";
+import { MemberBoard } from "@/components/member/member-board";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = { title: "학생" };
 
 export default async function StudentHomePage() {
-  const [{ profile, roles }, posts] = await Promise.all([
-    getSessionContext(),
-    getVisibleMemberPosts(),
-  ]);
-  const admin = roles.includes("admin");
+  const ctx = await getSessionContext();
+  const isAdmin = ctx.roles.includes("admin");
+
+  const board = await getBoardPosts("student");
+  const myPosts = ctx.user ? await getMyMemberPosts(ctx.user.id) : [];
+  const pending = isAdmin ? await getPendingMemberPosts("student") : null;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">
-            {profile?.nickname ?? "학생"}님, 환영합니다
-          </h1>
-          <p className="mt-1 text-muted-foreground">학생 전용 공간입니다.</p>
-        </div>
-        {admin ? (
-          <Button size="sm" render={<Link href="/admin/member-posts/new" />}>
-            <Plus className="size-4" />게시글 작성
-          </Button>
-        ) : null}
-      </div>
+      <h1 className="text-2xl font-bold tracking-tight">
+        {ctx.profile?.nickname ?? "학생"}님, 환영합니다
+      </h1>
+      <p className="mt-1 text-muted-foreground">학생 공간입니다.</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <Link href="/games" className="group">
@@ -53,23 +48,16 @@ export default async function StudentHomePage() {
         </Link>
       </div>
 
-      <section className="mt-8 space-y-3">
-        <h2 className="text-lg font-bold">과제 · 공지</h2>
-        <MemberPostList
-          posts={posts}
-          filterTypes={["assignment", "notice"]}
-          emptyText="등록된 과제·공지가 없습니다."
+      <div className="mt-8">
+        <MemberBoard
+          audience="student"
+          board={board}
+          myPosts={myPosts}
+          pending={pending}
+          isAdmin={isAdmin}
+          userId={ctx.user?.id ?? null}
         />
-      </section>
-
-      <section className="mt-8 space-y-3">
-        <h2 className="text-lg font-bold">학습 자료</h2>
-        <MemberPostList
-          posts={posts}
-          filterTypes={["resource", "guide"]}
-          emptyText="등록된 자료가 없습니다."
-        />
-      </section>
+      </div>
     </div>
   );
 }

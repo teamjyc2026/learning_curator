@@ -43,6 +43,7 @@ export async function saveMemberPostAction(
     status,
     pinned,
     due_at,
+    approval_status: "approved", // 관리자 작성글은 즉시 게시
   };
 
   if (id) {
@@ -70,6 +71,34 @@ export async function deleteMemberPostAction(formData: FormData) {
   if (!id) return;
   const supabase = await createClient();
   await supabase.from("member_posts").delete().eq("id", id);
+  revalidatePath("/admin/member-posts");
+  revalidatePath("/parent");
+  revalidatePath("/student");
+}
+
+export async function approveMemberPostAction(formData: FormData) {
+  await requireRole("admin");
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  const supabase = await createClient();
+  await supabase
+    .from("member_posts")
+    .update({ approval_status: "approved", published_at: new Date().toISOString() })
+    .eq("id", id);
+  revalidatePath("/admin/member-posts");
+  revalidatePath("/parent");
+  revalidatePath("/student");
+}
+
+export async function rejectMemberPostAction(formData: FormData) {
+  await requireRole("admin");
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  const supabase = await createClient();
+  await supabase
+    .from("member_posts")
+    .update({ approval_status: "rejected" })
+    .eq("id", id);
   revalidatePath("/admin/member-posts");
   revalidatePath("/parent");
   revalidatePath("/student");

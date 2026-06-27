@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     const service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const authHeader = req.headers.get("Authorization") ?? "";
 
-    // 1) 로그인 사용자 + 관리자 권한 확인
+    // 1) 로그인 사용자 확인(회원도 게시글 이미지 업로드 가능)
     const userClient = createClient(url, anon, {
       global: { headers: { Authorization: authHeader } },
     });
@@ -37,15 +37,6 @@ Deno.serve(async (req) => {
       data: { user },
     } = await userClient.auth.getUser();
     if (!user) return json({ error: "unauthorized" }, 401);
-
-    const { data: roleRow } = await userClient
-      .schema("web")
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", user.id)
-      .eq("role", "admin")
-      .maybeSingle();
-    if (!roleRow) return json({ error: "forbidden (admin only)" }, 403);
 
     // 2) PNG 입력 → AVIF 인코딩
     const input = new Uint8Array(await req.arrayBuffer());

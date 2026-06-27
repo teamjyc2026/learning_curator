@@ -38,7 +38,6 @@ const adminLinks: { href: string; label: string }[] = [
   { href: "/admin/games", label: "학습 게임 관리" },
   { href: "/admin/consultations", label: "상담 예약" },
   { href: "/admin/users", label: "회원·역할" },
-  { href: "/admin/newsletter", label: "뉴스레터" },
 ];
 
 function menuLinksFor(roles: AppRole[]): { href: string; label: string }[] {

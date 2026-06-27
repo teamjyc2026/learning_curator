@@ -1,8 +1,9 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
-import type { Tables } from "@/lib/supabase/database.types";
+import type { MemberAudience, Tables } from "@/lib/supabase/database.types";
 
 export type MemberPost = Tables<"member_posts">;
+export type MemberPostWithAuthor = MemberPost & { authorName: string | null };
 
 export const memberTypeLabel: Record<string, string> = {
   notice: "공지",
@@ -17,16 +18,74 @@ export const audienceLabel: Record<string, string> = {
   all: "전체",
 };
 
-/** 현재 사용자가 볼 수 있는 발행된 회원 게시글 (RLS가 audience로 필터). */
-export async function getVisibleMemberPosts(): Promise<MemberPost[]> {
+export const approvalLabel: Record<string, string> = {
+  pending: "검토중",
+  approved: "게시됨",
+  rejected: "반려",
+};
+
+/** author_id 목록 → {id: nickname} 맵 */
+async function authorNameMap(
+  ids: (string | null)[],
+): Promise<Map<string, string>> {
+  const unique = [...new Set(ids.filter((v): v is string => !!v))];
+  if (unique.length === 0) return new Map();
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("profiles")
+    .select("id, nickname")
+    .in("id", unique);
+  return new Map((data ?? []).map((p) => [p.id, p.nickname ?? "회원"]));
+}
+
+async function withAuthors(posts: MemberPost[]): Promise<MemberPostWithAuthor[]> {
+  const map = await authorNameMap(posts.map((p) => p.author_id));
+  return posts.map((p) => ({
+    ...p,
+    authorName: p.author_id ? (map.get(p.author_id) ?? null) : null,
+  }));
+}
+
+/** 게시판: 해당 audience(+all)의 승인·발행된 글. RLS off이므로 audience를 직접 필터. */
+export async function getBoardPosts(
+  audience: MemberAudience,
+): Promise<MemberPostWithAuthor[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from("member_posts")
     .select("*")
     .eq("status", "published")
+    .eq("approval_status", "approved")
+    .in("audience", [audience, "all"])
     .order("pinned", { ascending: false })
     .order("published_at", { ascending: false });
+  return withAuthors(data ?? []);
+}
+
+/** 내가 쓴 글(승인상태 무관) */
+export async function getMyMemberPosts(userId: string): Promise<MemberPost[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("member_posts")
+    .select("*")
+    .eq("author_id", userId)
+    .order("created_at", { ascending: false });
   return data ?? [];
+}
+
+/** 승인 대기 목록(관리자). audience 지정 시 해당 게시판만. */
+export async function getPendingMemberPosts(
+  audience?: MemberAudience,
+): Promise<MemberPostWithAuthor[]> {
+  const supabase = await createClient();
+  let q = supabase
+    .from("member_posts")
+    .select("*")
+    .eq("approval_status", "pending")
+    .order("created_at", { ascending: false });
+  if (audience) q = q.in("audience", [audience, "all"]);
+  const { data } = await q;
+  return withAuthors(data ?? []);
 }
 
 export async function getMemberPostById(id: string): Promise<MemberPost | null> {
@@ -39,12 +98,12 @@ export async function getMemberPostById(id: string): Promise<MemberPost | null> 
   return data ?? null;
 }
 
-// 관리자: 전체(초안 포함)
-export async function getAllMemberPosts(): Promise<MemberPost[]> {
+// 관리자: 전체(초안/대기 포함)
+export async function getAllMemberPosts(): Promise<MemberPostWithAuthor[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from("member_posts")
     .select("*")
     .order("updated_at", { ascending: false });
-  return data ?? [];
+  return withAuthors(data ?? []);
 }
