@@ -56,6 +56,17 @@ export async function requireRole(role: AppRole): Promise<SessionContext> {
   return ctx;
 }
 
+/** 헤더용 경량 세션(로그인 안 했으면 null). */
+export async function getHeaderSession() {
+  const ctx = await getSessionContext();
+  if (!ctx.user) return null;
+  return {
+    nickname: ctx.profile?.nickname ?? null,
+    avatarUrl: ctx.profile?.avatar_url ?? null,
+    roles: ctx.roles,
+  };
+}
+
 /** 역할에 따른 로그인 후 기본 랜딩 경로. */
 export function primaryRedirect(roles: AppRole[]): string {
   if (roles.includes("admin")) return "/admin";

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSessionContext } from "@/lib/auth/roles";
-import { AppHeader } from "@/components/layout/app-header";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export default async function AppLayout({
   children,
@@ -10,10 +11,17 @@ export default async function AppLayout({
   const ctx = await getSessionContext();
   if (!ctx.user) redirect("/login");
 
+  const session = {
+    nickname: ctx.profile?.nickname ?? null,
+    avatarUrl: ctx.profile?.avatar_url ?? null,
+    roles: ctx.roles,
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
-      <AppHeader profile={ctx.profile} roles={ctx.roles} />
-      <main className="flex-1 bg-muted/20">{children}</main>
+      <SiteHeader session={session} />
+      <main className="flex-1">{children}</main>
+      <SiteFooter />
     </div>
   );
 }
