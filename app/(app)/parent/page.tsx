@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { getSessionContext } from "@/lib/auth/roles";
-import { getBoardPosts } from "@/lib/queries/member-posts";
-import { MemberPostList } from "@/components/member/post-list";
+import { getSessionContext } from "@/entities/session";
+import { getBoardPosts } from "@/entities/member-post";
+import { MemberPostList } from "@/entities/member-post";
 
 export const metadata: Metadata = { title: "학부모" };
 

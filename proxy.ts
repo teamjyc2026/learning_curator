@@ -1,5 +1,5 @@
 import { type NextRequest } from "next/server";
-import { updateSession } from "@/lib/supabase/middleware";
+import { updateSession } from "@/shared/lib/supabase/middleware";
 
 // Next.js 16: `middleware` 컨벤션이 `proxy`로 변경됨.
 export async function proxy(request: NextRequest) {

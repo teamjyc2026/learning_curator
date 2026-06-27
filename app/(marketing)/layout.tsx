@@ -1,6 +1,6 @@
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { getHeaderSession } from "@/lib/auth/roles";
+import { SiteHeader } from "@/widgets/site-header";
+import { SiteFooter } from "@/widgets/site-footer";
+import { getHeaderSession } from "@/entities/session";
 
 export default async function MarketingLayout({
   children,

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
-import { getSessionContext } from "@/lib/auth/roles";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
+import { getSessionContext } from "@/entities/session";
+import { SiteHeader } from "@/widgets/site-header";
+import { SiteFooter } from "@/widgets/site-footer";
 
 export default async function AppLayout({
   children,

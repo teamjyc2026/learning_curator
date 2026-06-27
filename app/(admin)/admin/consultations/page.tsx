@@ -3,10 +3,10 @@ import {
   channelLabel,
   consultationStatusLabel,
   getAllConsultations,
-} from "@/lib/queries/consultations";
+} from "@/entities/consultation";
 import { updateConsultationAction } from "./actions";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { Badge } from "@/shared/ui/badge";
 
 export const metadata: Metadata = { title: "상담 예약 관리" };
 

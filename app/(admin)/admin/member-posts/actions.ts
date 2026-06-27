@@ -2,13 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
-import { requireRole } from "@/lib/auth/roles";
+import { createClient } from "@/shared/lib/supabase/server";
+import { requireRole } from "@/entities/session";
 import type {
   MemberAudience,
   MemberPostType,
   PostStatus,
-} from "@/lib/supabase/database.types";
+} from "@/shared/lib/supabase/database.types";
 
 export type MemberPostFormState = { error?: string } | null;
 

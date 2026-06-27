@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Gamepad2, History } from "lucide-react";
-import { getSessionContext } from "@/lib/auth/roles";
-import { getBoardPosts } from "@/lib/queries/member-posts";
-import { MemberPostList } from "@/components/member/post-list";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getSessionContext } from "@/entities/session";
+import { getBoardPosts } from "@/entities/member-post";
+import { MemberPostList } from "@/entities/member-post";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/shared/ui/card";
 
 export const metadata: Metadata = { title: "학생" };
 

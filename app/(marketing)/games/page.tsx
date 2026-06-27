@@ -7,17 +7,17 @@ import {
   ExternalLink,
   Plus,
 } from "lucide-react";
-import { getVisibleGames, visibilityLabel, type Game } from "@/lib/queries/games";
-import { Button } from "@/components/ui/button";
-import { AdminOnly } from "@/components/auth/session";
-import { PageHeader } from "@/components/layout/page-header";
+import { getVisibleGames, visibilityLabel, type Game } from "@/entities/game";
+import { Button } from "@/shared/ui/button";
+import { AdminOnly } from "@/features/auth/session";
+import { PageHeader } from "@/shared/ui/page-header";
 import {
   Stagger,
   StaggerItem,
   HoverLift,
   Reveal,
-} from "@/components/motion/motion-primitives";
-import { Badge } from "@/components/ui/badge";
+} from "@/shared/ui/motion-primitives";
+import { Badge } from "@/shared/ui/badge";
 
 export const metadata: Metadata = { title: "학습 게임 · 자가진단" };
 

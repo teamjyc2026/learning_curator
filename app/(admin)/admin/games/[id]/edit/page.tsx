@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getGameById } from "@/lib/queries/games";
+import { getGameById } from "@/entities/game";
 import { GameForm } from "../../game-form";
 
 export const metadata: Metadata = { title: "게임 편집" };

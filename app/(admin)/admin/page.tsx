@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/shared/ui/card";
 
 export const metadata: Metadata = { title: "관리자" };
 

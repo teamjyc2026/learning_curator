@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { getCategories } from "@/lib/queries/posts";
+import { getCategories } from "@/entities/post";
 import { deleteCategoryAction } from "./actions";
 import { CategoryForm } from "./category-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 
 export const metadata: Metadata = { title: "카테고리 관리" };
 

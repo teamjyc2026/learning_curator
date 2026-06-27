@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getMyGameResults } from "@/lib/queries/games";
+import { getMyGameResults } from "@/entities/game";
 
 export const metadata: Metadata = { title: "내 진단 기록" };
 

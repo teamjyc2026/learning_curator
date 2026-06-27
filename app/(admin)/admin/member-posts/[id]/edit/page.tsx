@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getMemberPostById } from "@/lib/queries/member-posts";
+import { getMemberPostById } from "@/entities/member-post";
 import { MemberPostForm } from "../../member-post-form";
 
 export const metadata: Metadata = { title: "회원게시글 편집" };

@@ -2,18 +2,18 @@
 
 import { useActionState, useState } from "react";
 import { saveGameAction, type GameFormState } from "./actions";
-import type { Game } from "@/lib/queries/games";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import type { Game } from "@/entities/game";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
+import { Label } from "@/shared/ui/label";
+import { Textarea } from "@/shared/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/ui/select";
 
 export function GameForm({ game }: { game?: Game }) {
   const [state, action, pending] = useActionState<GameFormState, FormData>(

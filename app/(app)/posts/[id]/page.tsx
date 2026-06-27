@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { getSessionContext, primaryRedirect } from "@/lib/auth/roles";
-import { audienceLabel, getMemberPostById } from "@/lib/queries/member-posts";
-import { RichContent } from "@/components/rich-content";
-import { Badge } from "@/components/ui/badge";
+import { getSessionContext, primaryRedirect } from "@/entities/session";
+import { audienceLabel, getMemberPostById } from "@/entities/member-post";
+import { RichContent } from "@/shared/ui/rich-content";
+import { Badge } from "@/shared/ui/badge";
 
 export default async function MemberPostDetailPage({
   params,

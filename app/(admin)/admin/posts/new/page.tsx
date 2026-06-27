@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getCategories } from "@/lib/queries/posts";
+import { getCategories } from "@/entities/post";
 import { PostForm } from "../post-form";
 
 export const metadata: Metadata = { title: "새 글 작성" };

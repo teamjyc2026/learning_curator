@@ -2,19 +2,19 @@
 
 import { useActionState } from "react";
 import { savePostAction, type PostFormState } from "./actions";
-import type { Category, Post } from "@/lib/queries/posts";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import type { Category, Post } from "@/entities/post";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
+import { Label } from "@/shared/ui/label";
+import { Textarea } from "@/shared/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { RichTextEditor } from "@/components/editor/rich-text-editor";
+} from "@/shared/ui/select";
+import { RichTextEditor } from "@/features/rich-editor";
 
 export function PostForm({
   categories,

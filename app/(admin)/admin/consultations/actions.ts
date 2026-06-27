@@ -1,9 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
-import { requireRole } from "@/lib/auth/roles";
-import type { ConsultationStatus } from "@/lib/supabase/database.types";
+import { createClient } from "@/shared/lib/supabase/server";
+import { requireRole } from "@/entities/session";
+import type { ConsultationStatus } from "@/shared/lib/supabase/database.types";
 
 export async function updateConsultationAction(formData: FormData) {
   const { user } = await requireRole("admin");

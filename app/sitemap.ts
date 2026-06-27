@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getPublishedPosts } from "@/lib/queries/posts";
-import { getVisibleGames } from "@/lib/queries/games";
+import { getPublishedPosts } from "@/entities/post";
+import { getVisibleGames } from "@/entities/game";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001";
 

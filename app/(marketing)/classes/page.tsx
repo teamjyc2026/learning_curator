@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus, MonitorPlay } from "lucide-react";
-import { getPublishedPosts, ONLINE_CLASS_SLUG } from "@/lib/queries/posts";
-import { PageHeader } from "@/components/layout/page-header";
-import { AdminOnly } from "@/components/auth/session";
-import { Button } from "@/components/ui/button";
+import { getPublishedPosts, ONLINE_CLASS_SLUG } from "@/entities/post";
+import { PageHeader } from "@/shared/ui/page-header";
+import { AdminOnly } from "@/features/auth/session";
+import { Button } from "@/shared/ui/button";
 import {
   Stagger,
   StaggerItem,
   HoverLift,
-} from "@/components/motion/motion-primitives";
+} from "@/shared/ui/motion-primitives";
 
 export const metadata: Metadata = { title: "온라인수업" };
 

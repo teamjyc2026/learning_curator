@@ -5,10 +5,10 @@ import {
   audienceLabel,
   getAllMemberPosts,
   memberTypeLabel,
-} from "@/lib/queries/member-posts";
+} from "@/entities/member-post";
 import { deleteMemberPostAction } from "./actions";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { Badge } from "@/shared/ui/badge";
 
 export const metadata: Metadata = { title: "회원게시글 관리" };
 

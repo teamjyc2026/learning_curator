@@ -3,8 +3,8 @@
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { createCategoryAction, type CategoryState } from "./actions";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
 
 export function CategoryForm() {
   const [state, action, pending] = useActionState<CategoryState, FormData>(

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/layout/page-header";
+import { PageHeader } from "@/shared/ui/page-header";
 import { Check } from "lucide-react";
 
 export const metadata: Metadata = { title: "멤버십" };

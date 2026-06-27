@@ -8,14 +8,14 @@ import {
   GraduationCap,
   Users,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { SectionHeading } from "@/components/layout/section-heading";
+import { Button } from "@/shared/ui/button";
+import { SectionHeading } from "@/shared/ui/section-heading";
 import {
   FadeIn,
   Reveal,
   Stagger,
   StaggerItem,
-} from "@/components/motion/motion-primitives";
+} from "@/shared/ui/motion-primitives";
 
 const features = [
   {

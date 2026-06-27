@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Pencil } from "lucide-react";
-import { getPublishedPostBySlug } from "@/lib/queries/posts";
-import { createClient } from "@/lib/supabase/server";
-import { RichContent } from "@/components/rich-content";
-import { AdminOnly } from "@/components/auth/session";
-import { Button } from "@/components/ui/button";
+import { getPublishedPostBySlug } from "@/entities/post";
+import { createClient } from "@/shared/lib/supabase/server";
+import { RichContent } from "@/shared/ui/rich-content";
+import { AdminOnly } from "@/features/auth/session";
+import { Button } from "@/shared/ui/button";
 
 export async function generateMetadata({
   params,

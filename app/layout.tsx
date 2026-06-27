@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "@/components/providers";
-import { siteConfig } from "@/lib/site-config";
+import { Providers } from "@/app/providers";
+import { siteConfig } from "@/shared/config/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(

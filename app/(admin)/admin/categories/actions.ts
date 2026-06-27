@@ -1,9 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
-import { requireRole } from "@/lib/auth/roles";
-import { ensureSlug } from "@/lib/utils/slug";
+import { createClient } from "@/shared/lib/supabase/server";
+import { requireRole } from "@/entities/session";
+import { ensureSlug } from "@/shared/lib/slug";
 
 export type CategoryState = { error?: string; success?: boolean } | null;
 

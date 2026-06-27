@@ -2,15 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
-import { requireRole } from "@/lib/auth/roles";
-import { uploadImage } from "@/lib/utils/storage";
-import { ensureSlug } from "@/lib/utils/slug";
+import { createClient } from "@/shared/lib/supabase/server";
+import { requireRole } from "@/entities/session";
+import { uploadImage } from "@/shared/lib/storage";
+import { ensureSlug } from "@/shared/lib/slug";
 import type {
   GameType,
   GameVisibility,
   PostStatus,
-} from "@/lib/supabase/database.types";
+} from "@/shared/lib/supabase/database.types";
 
 export type GameFormState = { error?: string } | null;
 

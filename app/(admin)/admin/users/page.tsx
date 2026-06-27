@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { getUsersWithRoles } from "@/lib/queries/admin-users";
+import { getUsersWithRoles } from "@/entities/user";
 import { setUserRoleAction } from "./actions";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import type { AppRole } from "@/lib/supabase/database.types";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
+import { Button } from "@/shared/ui/button";
+import type { AppRole } from "@/shared/lib/supabase/database.types";
 
 export const metadata: Metadata = { title: "회원 관리" };
 

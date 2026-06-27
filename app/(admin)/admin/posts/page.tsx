@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { getAllPosts, getCategories } from "@/lib/queries/posts";
+import { getAllPosts, getCategories } from "@/entities/post";
 import { deletePostAction } from "./actions";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { Badge } from "@/shared/ui/badge";
 
 export const metadata: Metadata = { title: "블로그 관리" };
 

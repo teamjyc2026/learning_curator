@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { getGameBySlug } from "@/lib/queries/games";
-import { getUser } from "@/lib/auth/roles";
-import { FusionSelfCheck } from "@/components/games/fusion-self-check/fusion-self-check";
-import { EmbeddedGame } from "@/components/games/embedded-game";
+import { getGameBySlug } from "@/entities/game";
+import { getUser } from "@/entities/session";
+import { FusionSelfCheck } from "@/features/game-self-check";
+import { EmbeddedGame } from "@/features/game-embed";
 
 export async function generateMetadata({
   params,

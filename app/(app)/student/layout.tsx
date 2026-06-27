@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/auth/roles";
+import { requireRole } from "@/entities/session";
 
 export default async function StudentLayout({
   children,

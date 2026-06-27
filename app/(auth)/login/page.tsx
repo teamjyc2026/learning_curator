@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/shared/ui/card";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = { title: "로그인" };

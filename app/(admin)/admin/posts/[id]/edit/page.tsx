@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getCategories, getPostById } from "@/lib/queries/posts";
+import { getCategories, getPostById } from "@/entities/post";
 import { PostForm } from "../../post-form";
 
 export const metadata: Metadata = { title: "글 편집" };

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { getSessionContext } from "@/lib/auth/roles";
+import { getSessionContext } from "@/entities/session";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/shared/ui/card";
 import { AccountForm } from "./account-form";
 
 export const metadata: Metadata = { title: "내 계정" };

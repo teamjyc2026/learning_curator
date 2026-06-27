@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { getAllGames, visibilityLabel } from "@/lib/queries/games";
+import { getAllGames, visibilityLabel } from "@/entities/game";
 import { deleteGameAction } from "./actions";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { Badge } from "@/shared/ui/badge";
 
 export const metadata: Metadata = { title: "게임 관리" };
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader, ComingSoon } from "@/components/layout/page-header";
+import { PageHeader, ComingSoon } from "@/shared/ui/page-header";
 
 export const metadata: Metadata = { title: "자료" };
 
