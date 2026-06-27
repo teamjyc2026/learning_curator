@@ -36,7 +36,11 @@ export function MemberPostForm({ post }: { post?: MemberPost }) {
       <div className="grid gap-5 sm:grid-cols-3">
         <div className="space-y-1.5">
           <Label htmlFor="audience">대상</Label>
-          <Select name="audience" defaultValue={post?.audience ?? "all"}>
+          <Select
+            name="audience"
+            defaultValue={post?.audience ?? "all"}
+            items={{ all: "전체 회원", parent: "학부모", student: "학생" }}
+          >
             <SelectTrigger id="audience">
               <SelectValue />
             </SelectTrigger>
@@ -49,7 +53,16 @@ export function MemberPostForm({ post }: { post?: MemberPost }) {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="post_type">유형</Label>
-          <Select name="post_type" defaultValue={post?.post_type ?? "notice"}>
+          <Select
+            name="post_type"
+            defaultValue={post?.post_type ?? "notice"}
+            items={{
+              notice: "공지",
+              guide: "안내",
+              resource: "자료",
+              assignment: "과제",
+            }}
+          >
             <SelectTrigger id="post_type">
               <SelectValue />
             </SelectTrigger>
@@ -63,7 +76,11 @@ export function MemberPostForm({ post }: { post?: MemberPost }) {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="status">상태</Label>
-          <Select name="status" defaultValue={post?.status ?? "published"}>
+          <Select
+            name="status"
+            defaultValue={post?.status ?? "published"}
+            items={{ published: "발행", draft: "초안", archived: "보관" }}
+          >
             <SelectTrigger id="status">
               <SelectValue />
             </SelectTrigger>

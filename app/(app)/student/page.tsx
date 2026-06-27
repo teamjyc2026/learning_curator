@@ -1,25 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Gamepad2, History } from "lucide-react";
+import { Gamepad2, History, Plus } from "lucide-react";
 import { getSessionContext } from "@/lib/auth/roles";
 import { getVisibleMemberPosts } from "@/lib/queries/member-posts";
 import { MemberPostList } from "@/components/member/member-post-list";
+import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = { title: "학생" };
 
 export default async function StudentHomePage() {
-  const [{ profile }, posts] = await Promise.all([
+  const [{ profile, roles }, posts] = await Promise.all([
     getSessionContext(),
     getVisibleMemberPosts(),
   ]);
+  const admin = roles.includes("admin");
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="text-2xl font-bold tracking-tight">
-        {profile?.nickname ?? "학생"}님, 환영합니다
-      </h1>
-      <p className="mt-1 text-muted-foreground">학생 전용 공간입니다.</p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {profile?.nickname ?? "학생"}님, 환영합니다
+          </h1>
+          <p className="mt-1 text-muted-foreground">학생 전용 공간입니다.</p>
+        </div>
+        {admin ? (
+          <Button size="sm" render={<Link href="/admin/member-posts/new" />}>
+            <Plus className="size-4" />게시글 작성
+          </Button>
+        ) : null}
+      </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <Link href="/games" className="group">

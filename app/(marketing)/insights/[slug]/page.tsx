@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
-import {
-  getCategoryBySlug,
-  getPublishedPostBySlug,
-} from "@/lib/queries/posts";
+import { ArrowLeft, Pencil } from "lucide-react";
+import { getPublishedPostBySlug } from "@/lib/queries/posts";
+import { isAdmin } from "@/lib/auth/roles";
 import { createClient } from "@/lib/supabase/server";
 import { RichContent } from "@/components/rich-content";
+import { Button } from "@/components/ui/button";
 
 export async function generateMetadata({
   params,
@@ -29,6 +28,8 @@ export default async function PostDetailPage({
   const post = await getPublishedPostBySlug(slug);
   if (!post) notFound();
 
+  const admin = await isAdmin();
+
   // 카테고리 이름 조회(별도 — 임베드 미사용)
   let categoryName: string | null = null;
   if (post.category_id) {
@@ -43,13 +44,25 @@ export default async function PostDetailPage({
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12">
-      <Link
-        href="/insights"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-      >
-        <ArrowLeft className="size-4" />
-        인사이트 목록
-      </Link>
+      <div className="flex items-center justify-between gap-3">
+        <Link
+          href="/insights"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="size-4" />
+          인사이트 목록
+        </Link>
+        {admin ? (
+          <Button
+            size="sm"
+            variant="outline"
+            render={<Link href={`/admin/posts/${post.id}/edit`} />}
+          >
+            <Pencil className="size-3.5" />
+            수정
+          </Button>
+        ) : null}
+      </div>
 
       <header className="mt-6">
         {categoryName ? (

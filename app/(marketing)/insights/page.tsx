@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Plus } from "lucide-react";
 import { getCategories, getPublishedPosts } from "@/lib/queries/posts";
+import { isAdmin } from "@/lib/auth/roles";
 import { PageHeader } from "@/components/layout/page-header";
+import { Button } from "@/components/ui/button";
 import { Stagger, StaggerItem, HoverLift } from "@/components/motion/motion-primitives";
 import { cn } from "@/lib/utils";
 
@@ -22,9 +25,10 @@ export default async function InsightsPage({
   searchParams: Promise<{ topic?: string }>;
 }) {
   const { topic } = await searchParams;
-  const [categories, posts] = await Promise.all([
+  const [categories, posts, admin] = await Promise.all([
     getCategories(),
     getPublishedPosts(topic),
+    isAdmin(),
   ]);
   const catMap = new Map(categories.map((c) => [c.id, c]));
 
@@ -36,6 +40,13 @@ export default async function InsightsPage({
         description="교육·학습 설계, 입시 소식, 학습법 칼럼을 발행합니다."
       />
       <div className="mx-auto max-w-6xl px-4 py-8">
+        {admin ? (
+          <div className="mb-5 flex justify-end">
+            <Button size="sm" render={<Link href="/admin/posts/new" />}>
+              <Plus className="size-4" />새 글 작성
+            </Button>
+          </div>
+        ) : null}
         <div className="flex flex-wrap gap-2">
           <Link href="/insights" className={chip(!topic)}>
             전체

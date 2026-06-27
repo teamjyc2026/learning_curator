@@ -42,6 +42,10 @@ export function GameForm({ game }: { game?: Game }) {
             name="game_type"
             value={gameType}
             onValueChange={(v) => setGameType(v ?? "embed")}
+            items={{
+              embed: "외부 URL 임베드 (웹인웹)",
+              internal: "내장 게임",
+            }}
           >
             <SelectTrigger id="game_type">
               <SelectValue />
@@ -68,7 +72,11 @@ export function GameForm({ game }: { game?: Game }) {
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="open_in">열기 방식</Label>
-            <Select name="open_in" defaultValue={game?.open_in ?? "newtab"}>
+            <Select
+              name="open_in"
+              defaultValue={game?.open_in ?? "newtab"}
+              items={{ newtab: "새 탭(권장)", iframe: "페이지 안(iframe)" }}
+            >
               <SelectTrigger id="open_in" className="min-w-36">
                 <SelectValue />
               </SelectTrigger>
@@ -112,7 +120,15 @@ export function GameForm({ game }: { game?: Game }) {
       <div className="grid gap-5 sm:grid-cols-3">
         <div className="space-y-1.5">
           <Label htmlFor="visibility">공개 범위</Label>
-          <Select name="visibility" defaultValue={game?.visibility ?? "public"}>
+          <Select
+            name="visibility"
+            defaultValue={game?.visibility ?? "public"}
+            items={{
+              public: "전체 공개",
+              student: "학생 전용",
+              member: "회원 전용",
+            }}
+          >
             <SelectTrigger id="visibility">
               <SelectValue />
             </SelectTrigger>
@@ -125,7 +141,11 @@ export function GameForm({ game }: { game?: Game }) {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="status">상태</Label>
-          <Select name="status" defaultValue={game?.status ?? "published"}>
+          <Select
+            name="status"
+            defaultValue={game?.status ?? "published"}
+            items={{ published: "발행", draft: "초안", archived: "보관" }}
+          >
             <SelectTrigger id="status">
               <SelectValue />
             </SelectTrigger>

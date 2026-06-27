@@ -56,6 +56,12 @@ export async function requireRole(role: AppRole): Promise<SessionContext> {
   return ctx;
 }
 
+/** 현재 사용자가 관리자인지 (공개 페이지의 인라인 관리 버튼 노출용). */
+export async function isAdmin(): Promise<boolean> {
+  const { roles } = await getSessionContext();
+  return roles.includes("admin");
+}
+
 /** 헤더용 경량 세션(로그인 안 했으면 null). */
 export async function getHeaderSession() {
   const ctx = await getSessionContext();

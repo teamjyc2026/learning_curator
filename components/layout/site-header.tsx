@@ -26,10 +26,24 @@ export interface HeaderSession {
 }
 
 const roleLinks: { role: AppRole; href: string; label: string }[] = [
-  { role: "admin", href: "/admin", label: "관리자" },
-  { role: "parent", href: "/parent", label: "학부모" },
-  { role: "student", href: "/student", label: "학생" },
+  { role: "parent", href: "/parent", label: "학부모 페이지" },
+  { role: "student", href: "/student", label: "학생 페이지" },
 ];
+
+// 관리자 메뉴(별도 관리자 페이지 대신 헤더 메뉴 항목으로 추가)
+const adminLinks: { href: string; label: string }[] = [
+  { href: "/admin/posts", label: "블로그 관리" },
+  { href: "/admin/member-posts", label: "회원 게시글" },
+  { href: "/admin/games", label: "학습 게임 관리" },
+  { href: "/admin/consultations", label: "상담 예약" },
+  { href: "/admin/users", label: "회원·역할" },
+  { href: "/admin/newsletter", label: "뉴스레터" },
+];
+
+function menuLinksFor(roles: AppRole[]): { href: string; label: string }[] {
+  if (roles.includes("admin")) return adminLinks;
+  return roleLinks.filter((r) => roles.includes(r.role));
+}
 
 function Logo() {
   return (
@@ -58,7 +72,7 @@ function UserMenu({ session }: { session: HeaderSession }) {
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
-  const myRoleLinks = roleLinks.filter((r) => session.roles.includes(r.role));
+  const links = menuLinksFor(session.roles);
 
   return (
     <div className="relative" ref={ref}>
@@ -78,17 +92,23 @@ function UserMenu({ session }: { session: HeaderSession }) {
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-50 mt-2 w-52 overflow-hidden rounded-lg border bg-popover p-1 text-popover-foreground shadow-lg">
-          {myRoleLinks.map((r) => (
+        <div className="absolute right-0 z-50 mt-2 max-h-[80vh] w-56 overflow-y-auto rounded-lg border bg-popover p-1 text-popover-foreground shadow-lg">
+          {session.roles.includes("admin") ? (
+            <p className="px-3 pt-1.5 pb-1 text-xs font-semibold text-muted-foreground">
+              관리
+            </p>
+          ) : null}
+          {links.map((l) => (
             <Link
-              key={r.href}
-              href={r.href}
+              key={l.href}
+              href={l.href}
               onClick={() => setOpen(false)}
               className="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
             >
-              {r.label} 페이지
+              {l.label}
             </Link>
           ))}
+          <div className="my-1 h-px bg-border" />
           <Link
             href="/account"
             onClick={() => setOpen(false)}
@@ -123,9 +143,7 @@ export function SiteHeader({ session }: { session: HeaderSession | null }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const myRoleLinks = session
-    ? roleLinks.filter((r) => session.roles.includes(r.role))
-    : [];
+  const mobileLinks = session ? menuLinksFor(session.roles) : [];
 
   return (
     <header
@@ -213,14 +231,14 @@ export function SiteHeader({ session }: { session: HeaderSession | null }) {
 
                 {session ? (
                   <>
-                    {myRoleLinks.map((r) => (
+                    {mobileLinks.map((l) => (
                       <Link
-                        key={r.href}
-                        href={r.href}
+                        key={l.href}
+                        href={l.href}
                         onClick={() => setOpen(false)}
                         className="rounded-md px-3 py-2.5 text-base font-medium hover:bg-accent"
                       >
-                        {r.label} 페이지
+                        {l.label}
                       </Link>
                     ))}
                     <Link

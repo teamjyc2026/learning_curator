@@ -44,7 +44,14 @@ export function PostForm({
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="category_id">카테고리</Label>
-          <Select name="category_id" defaultValue={post?.category_id ?? "none"}>
+          <Select
+            name="category_id"
+            defaultValue={post?.category_id ?? "none"}
+            items={{
+              none: "선택 안 함",
+              ...Object.fromEntries(categories.map((c) => [c.id, c.name])),
+            }}
+          >
             <SelectTrigger id="category_id">
               <SelectValue placeholder="선택 안 함" />
             </SelectTrigger>
@@ -87,7 +94,11 @@ export function PostForm({
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="status">상태</Label>
-          <Select name="status" defaultValue={post?.status ?? "draft"}>
+          <Select
+            name="status"
+            defaultValue={post?.status ?? "draft"}
+            items={{ draft: "초안", published: "발행", archived: "보관" }}
+          >
             <SelectTrigger id="status">
               <SelectValue />
             </SelectTrigger>

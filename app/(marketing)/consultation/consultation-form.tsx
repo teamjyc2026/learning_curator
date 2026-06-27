@@ -76,7 +76,15 @@ export function ConsultationForm() {
 
       <div className="space-y-1.5">
         <Label htmlFor="channel">상담 방식</Label>
-        <Select name="channel" defaultValue="visit">
+        <Select
+          name="channel"
+          defaultValue="visit"
+          items={{
+            visit: "방문 상담",
+            phone: "전화 상담",
+            online: "온라인 상담",
+          }}
+        >
           <SelectTrigger id="channel">
             <SelectValue />
           </SelectTrigger>
