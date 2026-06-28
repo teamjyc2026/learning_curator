@@ -238,11 +238,11 @@ export function FusionSelfCheck({
                 </div>
               </div>
             </div>
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-              <div className="text-xs font-extrabold text-amber-700">
+            <div className="mt-4 rounded-xl border border-highlight/30 bg-highlight/10 p-4">
+              <div className="text-xs font-extrabold text-highlight">
                 오늘의 한 걸음 — {SIGNALS[lowI].ko}
               </div>
-              <div className="mt-1.5 text-sm font-medium text-amber-900">
+              <div className="mt-1.5 text-sm font-medium text-foreground">
                 {SIGNALS[lowI].step}
               </div>
             </div>

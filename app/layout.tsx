@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import { siteConfig } from "@/shared/config/site";
@@ -12,12 +12,26 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  appleWebApp: {
+    capable: true,
+    title: siteConfig.shortName,
+    statusBarStyle: "default",
+  },
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
   },
+};
+
+// Next 16: themeColor/colorScheme는 metadata가 아니라 viewport에 둔다.
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#15131f" },
+  ],
 };
 
 export default function RootLayout({

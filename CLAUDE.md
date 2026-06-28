@@ -6,7 +6,7 @@
 - Next.js 16 (App Router, React 19, TS) · Tailwind v4
 - **커스텀 UI 키트**(`components/ui/*`, Tailwind + CVA, shadcn 제거됨) + `@base-ui/react`는 **select/sheet에만** 사용
 - **Framer Motion**(`motion`) — `components/motion/motion-primitives.tsx`(FadeIn/Reveal/Stagger/HoverLift)
-- 테마: **인디고**(globals.css CSS 변수, primary `#4f46e5`, accent amber). 라이트/다크 토큰.
+- 테마: **러닝큐레이터 브랜드**(globals.css CSS 변수) — primary 인디고 `#2E2A78`, point 바이올렛 `#6B5BE6`, highlight 코랄 `#FF6A5B`, 브랜드 점 coral→amber. 라이트/다크 토큰. **다크모드 실동작**: `next-themes` ThemeProvider(attribute=class)는 `src/app/providers.tsx`에 연결, 헤더 `ThemeToggle`로 전환. 브랜드 마크는 `shared/ui/brand-logo.tsx`(CSS변수 그라데이션으로 테마 반응), 원본 자산은 `reference/brand/`(빌드 제외).
 - Supabase (Postgres + Auth + Storage + RLS), `@supabase/ssr`
 - TanStack Query (서버 상태) · Zustand (클라이언트 상태)
 

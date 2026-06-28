@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, Menu, ArrowRight, ChevronDown } from "lucide-react";
+import { Menu, ArrowRight, ChevronDown } from "lucide-react";
 import { Button, buttonVariants } from "@/shared/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
@@ -19,6 +19,8 @@ import { useAuthSession } from "@/features/auth/session";
 import type { AppRole } from "@/shared/lib/supabase/database.types";
 import { cn } from "@/shared/lib/utils";
 import { SocialLinks } from "@/shared/ui/social-links";
+import { BrandLogo } from "@/shared/ui/brand-logo";
+import { ThemeToggle } from "@/shared/ui/theme-toggle";
 
 export interface HeaderSession {
   nickname: string | null;
@@ -47,10 +49,12 @@ function menuLinksFor(roles: AppRole[]): { href: string; label: string }[] {
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2">
-      <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-        <GraduationCap className="size-5" />
-      </span>
+    <Link
+      href="/"
+      className="flex items-center gap-2"
+      aria-label={`${siteConfig.shortName} 홈`}
+    >
+      <BrandLogo className="size-8" />
       <span className="font-heading text-lg font-extrabold tracking-tight">
         {siteConfig.shortName}
       </span>
@@ -206,6 +210,8 @@ export function SiteHeader({
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
+          <ThemeToggle className="hidden sm:inline-flex" />
+
           <Button size="sm" render={<Link href="/consultation" />}>
             상담예약
             <ArrowRight className="size-3.5" />
@@ -308,8 +314,9 @@ export function SiteHeader({
                   </Link>
                 )}
               </nav>
-              <div className="mt-4 px-4">
+              <div className="mt-4 flex items-center justify-between px-4">
                 <SocialLinks />
+                <ThemeToggle />
               </div>
             </SheetContent>
           </Sheet>

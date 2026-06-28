@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { GraduationCap } from "lucide-react";
 import { siteConfig } from "@/shared/config/site";
 import { SocialLinks } from "@/shared/ui/social-links";
+import { BrandLogo } from "@/shared/ui/brand-logo";
 
 export function SiteFooter() {
   return (
@@ -9,9 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-2">
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <GraduationCap className="size-5" />
-            </span>
+            <BrandLogo className="size-8" />
             <span className="font-heading text-lg font-extrabold">
               {siteConfig.shortName}
             </span>

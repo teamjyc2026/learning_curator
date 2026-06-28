@@ -22,7 +22,7 @@ export function LoginForm({
   return (
     <form action={action} className="space-y-4">
       {registered ? (
-        <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+        <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
           가입이 접수되었습니다. 이메일 인증이 필요한 경우 메일을 확인한 뒤
           로그인해 주세요.
         </p>

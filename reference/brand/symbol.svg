@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="188.0" height="188.0" viewBox="0 0 188.0 188.0" font-family="sans-serif"><defs>
+  <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#6B5BE6"/><stop offset="1" stop-color="#2E2A78"/></linearGradient>
+  <linearGradient id="ringD" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#A99BFF"/><stop offset="1" stop-color="#8E7BFF"/></linearGradient>
+  <linearGradient id="dot" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#FF6A5B"/><stop offset="1" stop-color="#FFB13D"/></linearGradient>
+  <linearGradient id="appgrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#6B5BE6"/><stop offset="1" stop-color="#2E2A78"/></linearGradient>
+</defs><g transform="translate(14.00,14.00) scale(1.3333)"><path d="M 103.04 50.85 A 44.0 44.0 0 1 1 69.15 16.96" fill="none" stroke="url(#ring)" stroke-width="11.0" stroke-linecap="round"/><circle cx="43.74" cy="76.26" r="3.0" fill="url(#dot)"/><circle cx="63.54" cy="56.46" r="4.8" fill="url(#dot)"/><circle cx="83.33" cy="36.67" r="7.2" fill="url(#dot)"/></g></svg>

@@ -48,76 +48,87 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     monospace;
   --radius: 0.375rem;
-  /* OS 다크모드에서도 UA 캔버스/스크롤바가 어둡게 칠해지는 것 방지(상단 검은 바 현상) */
   color-scheme: light;
 
-  /* 브랜드 컬러 시스템 — Learning Curator
-     MAIN Deep Sage Navy #2A3A56 · SUB Warm Peach Sand #FCEADE
-     POINT Deep Coastal Teal #299CAE · TEXT Slate Blue Gray #64748B
-     BG Pristine Ivory #FAF8F5 */
-  --background: #faf8f5;
-  --foreground: #2a3a56;
+  /* 브랜드 컬러 시스템 — Learning Curator "Curated Growth"
+     INDIGO #2E2A78(MAIN 채움) · VIOLET #6B5BE6(POINT 링크/포커스)
+     CORAL #FF6A5B · AMBER #FFB13D(브랜드 점) · INK #1C1B2E(본문)
+     MUTED #8A8AA0(보조) · BG #F6F5F1 · CARD #FFFFFF · DARK #15131F */
+  --background: #f6f5f1;
+  --foreground: #1c1b2e;
   --card: #ffffff;
-  --card-foreground: #2a3a56;
+  --card-foreground: #1c1b2e;
   --popover: #ffffff;
-  --popover-foreground: #2a3a56;
+  --popover-foreground: #1c1b2e;
 
-  --primary: #2a3a56; /* MAIN — 채움 CTA */
-  --primary-foreground: #faf8f5;
-  --primary-soft: #fceade; /* SUB Warm Peach Sand */
+  --primary: #2e2a78; /* INDIGO — 채움 CTA */
+  --primary-foreground: #f6f5f1;
+  --primary-soft: #eceafb; /* 소프트 바이올렛 틴트 */
 
-  --point: #299cae; /* POINT — 링크/액티브/포커스 */
+  --point: #6b5be6; /* VIOLET — 링크/액티브/포커스 */
   --point-foreground: #ffffff;
 
-  --secondary: #f1ece5;
-  --secondary-foreground: #2a3a56;
-  --muted: #f4f0ea;
-  --muted-foreground: #64748b; /* TEXT Slate Blue Gray — 본문/보조 */
-  --accent: #f1ece5;
-  --accent-foreground: #2a3a56;
+  --secondary: #eeede7;
+  --secondary-foreground: #1c1b2e;
+  --muted: #f1efe9;
+  --muted-foreground: #8a8aa0; /* MUTED — 본문/보조 */
+  --accent: #edebf9; /* hover:bg-accent = 소프트 바이올렛 */
+  --accent-foreground: #2e2a78;
 
-  --highlight: #299cae;
+  --highlight: #ff6a5b; /* CORAL — 강조/배지 */
   --highlight-foreground: #ffffff;
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #e9e2d7;
-  --input: #e2dacb;
-  --ring: #299cae;
+  --border: #e7e3da;
+  --input: #dedacf;
+  --ring: #6b5be6;
+
+  /* 브랜드 그라데이션 변수 — BrandLogo 링/점이 테마 반응 */
+  --brand-ring-from: #6b5be6;
+  --brand-ring-to: #2e2a78;
+  --brand-dot-from: #ff6a5b;
+  --brand-dot-to: #ffb13d;
 }
 
 .dark {
-  --background: #1a2233;
-  --foreground: #f3f1ec;
-  --card: #222c40;
-  --card-foreground: #f3f1ec;
-  --popover: #222c40;
-  --popover-foreground: #f3f1ec;
+  color-scheme: dark; /* UA 스크롤바/폼 컨트롤 다크 대응 */
 
-  --primary: #e9e2d7;
-  --primary-foreground: #1a2233;
-  --primary-soft: #2c3850;
+  --background: #15131f;
+  --foreground: #f4f3fa;
+  --card: #1e1b2d;
+  --card-foreground: #f4f3fa;
+  --popover: #1e1b2d;
+  --popover-foreground: #f4f3fa;
 
-  --point: #4cb8c9;
-  --point-foreground: #08151b;
+  --primary: #8e7bff; /* 다크에서 밝은 바이올렛 */
+  --primary-foreground: #15131f;
+  --primary-soft: #29243f;
 
-  --secondary: #28324a;
-  --secondary-foreground: #f3f1ec;
-  --muted: #28324a;
-  --muted-foreground: #9aa6bd;
-  --accent: #2c3850;
-  --accent-foreground: #f3f1ec;
+  --point: #a99bff;
+  --point-foreground: #15131f;
 
-  --highlight: #4cb8c9;
-  --highlight-foreground: #08151b;
+  --secondary: #262238;
+  --secondary-foreground: #f4f3fa;
+  --muted: #232032;
+  --muted-foreground: #9d9ac0;
+  --accent: #2a2542;
+  --accent-foreground: #f4f3fa;
+
+  --highlight: #ff8071;
+  --highlight-foreground: #15131f;
 
   --destructive: #ff6166;
-  --destructive-foreground: #0d0f14;
+  --destructive-foreground: #15131f;
 
-  --border: #313d57;
-  --input: #36425e;
-  --ring: #4cb8c9;
+  --border: #2c2840;
+  --input: #332e4a;
+  --ring: #8e7bff;
+
+  /* 점 그라데이션은 라이트와 동일, 링만 밝게 */
+  --brand-ring-from: #a99bff;
+  --brand-ring-to: #8e7bff;
 }
 
 @layer base {
