@@ -21,7 +21,7 @@ export const siteConfig = {
   // 인사이트 교육단계별 카테고리 — 헤더 드롭다운/필터용 (web.post_categories와 slug 일치)
   // public:true 만 메뉴에 노출. 나머지는 콘텐츠가 쌓이면 공개 전환.
   insightCategories: [
-    { title: "유치교육", slug: "preschool", public: true },
+    { title: "유치교육", slug: "preschool", public: false },
     { title: "초등교육", slug: "elementary", public: true },
     { title: "중등교육", slug: "middle", public: true },
     { title: "고등교육", slug: "high", public: true },

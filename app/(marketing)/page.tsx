@@ -221,7 +221,7 @@ export default function HomePage() {
               지금, 학습 코칭을 시작하세요
             </h2>
             <p className="mt-3 break-keep text-muted-foreground">
-              상담은 무료입니다. 우리 아이에게 맞는 방향을 함께 찾아드립니다.
+              우리 아이에게 맞는 방향을 함께 찾아드립니다.
             </p>
           </Reveal>
           <Button size="lg" render={<Link href="/consultation" />}>

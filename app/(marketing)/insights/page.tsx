@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { getBlogCategories, getPublishedPosts } from "@/entities/post";
+import { siteConfig } from "@/shared/config/site";
 import { PageHeader } from "@/shared/ui/page-header";
 import { AdminOnly } from "@/features/auth/session";
 import { Button } from "@/shared/ui/button";
@@ -30,6 +31,11 @@ export default async function InsightsPage({
     getPublishedPosts(topic),
   ]);
   const catMap = new Map(categories.map((c) => [c.id, c]));
+  // 헤더 드롭다운과 동일하게 public:true 카테고리(초등/중등/고등)만 칩으로 노출
+  const publicSlugs = new Set<string>(
+    siteConfig.insightCategories.filter((c) => c.public).map((c) => c.slug),
+  );
+  const visibleCategories = categories.filter((c) => publicSlugs.has(c.slug));
 
   return (
     <>
@@ -50,7 +56,7 @@ export default async function InsightsPage({
           <Link href="/insights" className={chip(!topic)}>
             전체
           </Link>
-          {categories.map((c) => (
+          {visibleCategories.map((c) => (
             <Link
               key={c.id}
               href={`/insights?topic=${c.slug}`}
