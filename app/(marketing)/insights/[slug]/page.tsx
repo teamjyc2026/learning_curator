@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Pencil } from "lucide-react";
-import { getPublishedPostBySlug } from "@/entities/post";
+import { getPublishedPostBySlug, firstContentImage } from "@/entities/post";
 import { createClient } from "@/shared/lib/supabase/server";
 import { RichContent } from "@/shared/ui/rich-content";
 import { AdminOnly } from "@/features/auth/session";
@@ -16,7 +16,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPublishedPostBySlug(slug);
   if (!post) return { title: "글을 찾을 수 없음" };
-  return { title: post.title, description: post.excerpt ?? undefined };
+
+  const description = post.excerpt ?? undefined;
+  const image = post.cover_image_url ?? firstContentImage(post.content);
+
+  return {
+    title: post.title,
+    description,
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description,
+      url: `/insights/${post.slug}`,
+      images: image ? [{ url: image }] : undefined,
+      publishedTime: post.published_at ?? undefined,
+    },
+    twitter: {
+      card: image ? "summary_large_image" : "summary",
+      title: post.title,
+      description,
+      images: image ? [image] : undefined,
+    },
+  };
 }
 
 export default async function PostDetailPage({
