@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getMyGameResults } from "@/entities/game";
 
-export const metadata: Metadata = { title: "내 진단 기록" };
+export const metadata: Metadata = { title: "내 학습기록 및 진단 보고서" };
 
 type ResultShape = {
   total?: number;
@@ -23,7 +23,9 @@ export default async function StudentResultsPage() {
         <ArrowLeft className="size-4" />
         학생 홈
       </Link>
-      <h1 className="mt-4 text-2xl font-bold tracking-tight">내 진단 기록</h1>
+      <h1 className="mt-4 text-2xl font-bold tracking-tight">
+        내 학습기록 및 진단 보고서
+      </h1>
 
       <div className="mt-6 divide-y rounded-xl border bg-card">
         {results.length === 0 ? (

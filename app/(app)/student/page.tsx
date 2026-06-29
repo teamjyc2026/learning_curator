@@ -33,8 +33,8 @@ export default async function StudentHomePage() {
           <Card className="h-full transition-colors group-hover:border-foreground/30">
             <CardHeader>
               <History className="size-6 text-foreground" />
-              <CardTitle className="mt-1">내 진단 기록</CardTitle>
-              <CardDescription>자가진단 결과 이력을 확인하세요.</CardDescription>
+              <CardTitle className="mt-1">내 학습기록 및 진단 보고서</CardTitle>
+              <CardDescription>자가진단 결과와 학습 기록을 확인하세요.</CardDescription>
             </CardHeader>
           </Card>
         </Link>

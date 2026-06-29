@@ -96,6 +96,19 @@ type MemberPostRow = {
   updated_at: string;
 }
 
+type ParentQuestionRow = {
+  id: string;
+  author_id: string;
+  title: string;
+  content: string;
+  answer: string | null;
+  answered_at: string | null;
+  answered_by: string | null;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
 type GameRow = {
   id: string;
   slug: string;
@@ -212,6 +225,12 @@ export type Database = {
         Row: MemberPostRow;
         Insert: InsertOf<MemberPostRow, "title" | "audience">;
         Update: Partial<MemberPostRow>;
+        Relationships: [];
+      };
+      parent_questions: {
+        Row: ParentQuestionRow;
+        Insert: InsertOf<ParentQuestionRow, "author_id" | "title" | "content">;
+        Update: Partial<ParentQuestionRow>;
         Relationships: [];
       };
       games: {

@@ -37,6 +37,7 @@ const roleLinks: { role: AppRole; href: string; label: string }[] = [
 const adminLinks: { href: string; label: string }[] = [
   { href: "/admin/posts", label: "블로그 관리" },
   { href: "/admin/member-posts", label: "회원 게시글" },
+  { href: "/admin/parent-questions", label: "학부모 상담글" },
   { href: "/admin/games", label: "학습 게임 관리" },
   { href: "/admin/consultations", label: "상담 예약" },
   { href: "/admin/users", label: "회원·역할" },
