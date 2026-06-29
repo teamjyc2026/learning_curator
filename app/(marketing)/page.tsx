@@ -66,7 +66,7 @@ const stats = [
 const philosophy = [
   {
     title: "수동적 교육에서 능동적 학습으로",
-    desc: "남이 정해둔 정답만 쫓는 수동적 학습자에서 벗어나, 질문으로 스스로 모르는 것을 찾아내고 주도적으로 학습하는 단단한 리더로 성장하도록 배움의 여정을 안내합니다.",
+    desc: "우리는 아이들이 남이 정해둔 정답만을 쫓는 수동적인 학습자에서 벗어나, 질문을 통해 스스로 모르는 것을 찾아내고 그것을 주도적으로 학습해 나가는 단단한 리더로 성장하도록 배움의 여정을 안내합니다.",
   },
 ];
 
@@ -90,8 +90,8 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn delay={0.12}>
             <p className="mt-7 max-w-xl break-keep text-lg leading-relaxed text-muted-foreground">
-              칼럼·자료·학습 게임·상담을 한곳에서. 학생과 학부모를 위한 학습 코칭
-              플랫폼입니다.
+              칼럼·자료·학습 게임·상담을 한곳에서. 학생과 학부모를 위한{" "}
+              <span className="whitespace-nowrap">학습 코칭 플랫폼입니다.</span>
             </p>
           </FadeIn>
           <FadeIn delay={0.18}>
@@ -179,10 +179,16 @@ export default function HomePage() {
               그리는 ‘학습(Learning)’을 디자인합니다.”
             </p>
             <p className="mt-6 max-w-3xl break-keep leading-relaxed text-muted-foreground">
-              러닝 큐레이터는 지식을 일방적으로 주입하고 정답을 가르치는 기존
-              ‘교사·강사’의 역할을 넘어섭니다. 미술관의 큐레이터가 수많은 작품 중
-              가치 있는 것을 엄선해 관객에게 새로운 시각을 제시하듯, 우리는 배움의
-              맥락을 큐레이션해 학생이 스스로 의미를 발견하도록 돕습니다.
+              러닝 큐레이터는 단순히 지식을 일방적으로 주입하고 정답을 가르치는
+              기존의 ‘교사(Teacher)’나 ‘강사(Instructor)’의 역할을 넘어섭니다.
+            </p>
+            <p className="mt-4 max-w-3xl break-keep leading-relaxed text-muted-foreground">
+              미술관의 큐레이터가 수많은 작품 중 가치 있는 것을 엄선해 관객에게
+              새로운 시각을 제시하듯, 러닝 큐레이터는 지식이 넘쳐나고 AI가 답을
+              대신해 주는 시대에 학생들이 수많은 정보 속에서 스스로 질문을 던지고,
+              자신만의 배움의 경로(지도)를 설계하며, 메타인지적 성찰을 통해 평생
+              성장할 수 있는 기초 체력을 기르도록 돕는 ‘학습 조력자이자
+              페이스메이커’입니다.
             </p>
           </Reveal>
 
