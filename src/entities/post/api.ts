@@ -64,13 +64,33 @@ export async function getPublishedPosts(categorySlug?: string): Promise<Post[]> 
   return data ?? [];
 }
 
-/** 공개 발행글 상세(slug). */
+/** 본문(HTML/마크다운)에서 첫 이미지 URL 추출 — 커버 미지정 시 카드 섬네일용. */
+export function firstContentImage(content: string | null): string | null {
+  if (!content) return null;
+  const html = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (html) return html[1];
+  const md = content.match(/!\[[^\]]*\]\(([^)\s]+)/);
+  if (md) return md[1];
+  return null;
+}
+
+/** 공개 발행글 상세(slug). 한글 등 비ASCII slug는 라우트 파라미터가 퍼센트
+ *  인코딩/다른 유니코드 정규화(NFC/NFD)로 들어올 수 있어 후보를 만들어 매칭. */
 export async function getPublishedPostBySlug(slug: string): Promise<Post | null> {
   const supabase = await createClient();
+  let decoded = slug;
+  try {
+    decoded = decodeURIComponent(slug);
+  } catch {
+    /* 잘못된 인코딩이면 원본 유지 */
+  }
+  const candidates = [
+    ...new Set([slug, decoded, decoded.normalize("NFC"), decoded.normalize("NFD")]),
+  ];
   const { data } = await supabase
     .from("posts")
     .select("*")
-    .eq("slug", slug)
+    .in("slug", candidates)
     .eq("status", "published")
     .maybeSingle();
   return data ?? null;

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus, MonitorPlay } from "lucide-react";
-import { getPublishedPosts, ONLINE_CLASS_SLUG } from "@/entities/post";
+import {
+  getPublishedPosts,
+  ONLINE_CLASS_SLUG,
+  firstContentImage,
+} from "@/entities/post";
 import { PageHeader } from "@/shared/ui/page-header";
 import { AdminOnly } from "@/features/auth/session";
 import { Button } from "@/shared/ui/button";
@@ -50,10 +54,14 @@ export default async function ClassesPage() {
                     href={`/insights/${post.slug}`}
                     className="group flex h-full flex-col overflow-hidden rounded-lg border bg-card transition-colors hover:border-foreground/30"
                   >
-                    {post.cover_image_url ? (
+                    {post.cover_image_url ?? firstContentImage(post.content) ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        src={post.cover_image_url}
+                        src={
+                          post.cover_image_url ??
+                          firstContentImage(post.content) ??
+                          undefined
+                        }
                         alt=""
                         className="aspect-[16/9] w-full object-cover"
                       />

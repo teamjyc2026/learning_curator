@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import { getBlogCategories, getPublishedPosts } from "@/entities/post";
+import {
+  getBlogCategories,
+  getPublishedPosts,
+  firstContentImage,
+} from "@/entities/post";
 import { siteConfig } from "@/shared/config/site";
 import { PageHeader } from "@/shared/ui/page-header";
 import { AdminOnly } from "@/features/auth/session";
@@ -75,6 +79,8 @@ export default async function InsightsPage({
           <Stagger className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
               const cat = post.category_id ? catMap.get(post.category_id) : null;
+              const thumb =
+                post.cover_image_url ?? firstContentImage(post.content);
               return (
                 <StaggerItem key={post.id} className="h-full">
                 <HoverLift className="h-full">
@@ -82,10 +88,10 @@ export default async function InsightsPage({
                   href={`/insights/${post.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-lg border bg-card transition-colors hover:border-foreground/30"
                 >
-                  {post.cover_image_url ? (
+                  {thumb ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={post.cover_image_url}
+                      src={thumb}
                       alt=""
                       className="aspect-[16/9] w-full object-cover"
                     />
