@@ -23,8 +23,11 @@ import { toast } from "sonner";
 import { createClient } from "@/shared/lib/supabase/client";
 import { cn } from "@/shared/lib/utils";
 
-/** 이미지 파일 → 캔버스 다운스케일 → PNG Blob (엣지함수가 AVIF로 변환) */
-async function fileToPngBlob(file: File, maxW = 1600): Promise<Blob> {
+/** 업로드 원본 이미지 최대 용량(MB). 초과 시 업로드 거부. */
+const MAX_IMAGE_MB = 10;
+
+/** 이미지 파일 → 캔버스 다운스케일 → PNG Blob (엣지함수가 WebP로 변환) */
+async function fileToPngBlob(file: File, maxW = 1280): Promise<Blob> {
   const bitmap = await createImageBitmap(file);
   const scale = Math.min(1, maxW / bitmap.width);
   const w = Math.max(1, Math.round(bitmap.width * scale));
@@ -235,6 +238,16 @@ export function RichTextEditor({
     if (!editor) return;
     setUploading(true);
     for (const file of files) {
+      if (!file.type.startsWith("image/")) {
+        toast.error("이미지 파일만 업로드할 수 있어요.");
+        continue;
+      }
+      if (file.size > MAX_IMAGE_MB * 1024 * 1024) {
+        toast.error(
+          `이미지가 너무 큽니다. ${MAX_IMAGE_MB}MB 이하 파일만 올릴 수 있어요.`,
+        );
+        continue;
+      }
       const toastId = toast.loading("이미지 압축·업로드 중…");
       try {
         const url = await uploadImage(file);
