@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "러닝 큐레이터",
   description:
     "수학을 넘어 생각의 힘을 키우는 학습 코칭 — 칼럼·자료·학습 게임·상담을 한곳에서.",
-  url: "https://example.com",
+  url: "https://learningcurator.ai.kr",
   // 상단/푸터 공통 네비게이션 — 핵심 4개 스펙(인사이트/학부모/학생/학습게임) + 소개/상담예약
   nav: [
     { title: "인사이트", href: "/insights" },

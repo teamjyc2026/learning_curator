@@ -3,10 +3,14 @@ import "./globals.css";
 import { Providers } from "@/app/providers";
 import { siteConfig } from "@/shared/config/site";
 
+// og:url 등 절대 URL 기준. 우선순위: 명시 env → (Vercel 배포면) 확정 도메인 → 로컬.
+// (미설정 시 og:url이 localhost로 박혀 카톡 등 링크 미리보기가 깨지므로 폴백 보강)
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL ? siteConfig.url : "http://localhost:3001");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001",
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${siteConfig.name} — 생각의 힘을 키우는 학습 코칭`,
     template: `%s | ${siteConfig.name}`,
