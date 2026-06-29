@@ -6,6 +6,7 @@ import { getGameBySlug } from "@/entities/game";
 import { getUser } from "@/entities/session";
 import { FusionSelfCheck } from "@/features/game-self-check";
 import { EmbeddedGame } from "@/features/game-embed";
+import { Button } from "@/shared/ui/button";
 
 export async function generateMetadata({
   params,
@@ -46,7 +47,25 @@ export default async function GameDetailPage({
       <div className="mt-6">
         {game.game_type === "internal" &&
         game.internal_key === "fusion-self-check" ? (
-          <FusionSelfCheck gameId={game.id} canSave={!!user} />
+          user ? (
+            <FusionSelfCheck gameId={game.id} canSave />
+          ) : (
+            <div className="rounded-xl border border-dashed bg-muted/20 p-12 text-center">
+              <p className="font-semibold">로그인 후 이용할 수 있어요</p>
+              <p className="mx-auto mt-2 max-w-sm break-keep text-sm text-muted-foreground">
+                융합형 사고 자가진단은 로그인한 회원만 진행할 수 있습니다. 결과는
+                내 학습기록에 저장돼요.
+              </p>
+              <Button
+                className="mt-5"
+                render={
+                  <Link href={`/login?redirect=/games/${slug}`} />
+                }
+              >
+                로그인하고 진단 시작하기
+              </Button>
+            </div>
+          )
         ) : game.game_type === "embed" && game.embed_url ? (
           <EmbeddedGame
             url={game.embed_url}
