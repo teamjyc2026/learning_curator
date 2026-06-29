@@ -47,6 +47,111 @@ function menuLinksFor(roles: AppRole[]): { href: string; label: string }[] {
   return roleLinks.filter((r) => roles.includes(r.role));
 }
 
+function navLinkCls(active: boolean) {
+  return cn(
+    "px-3 py-2 text-sm font-medium underline-offset-8 transition-colors",
+    active
+      ? "text-foreground underline decoration-2"
+      : "text-muted-foreground hover:text-foreground",
+  );
+}
+
+// 메뉴에 노출할 인사이트 카테고리(공개분만). 나머지는 콘텐츠가 쌓이면 공개 전환.
+const insightMenu = siteConfig.insightCategories.filter((c) => c.public);
+
+// 데스크톱: 인사이트 — 클릭하면 펼쳐지는 카테고리 드롭다운(기본 접힘)
+function InsightsNav({ active, title }: { active: boolean; title: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false); // 라우트 이동 시 닫기
+  }, [pathname]);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative flex items-center">
+      <Link href="/insights" className={navLinkCls(active)}>
+        {title}
+      </Link>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-label="인사이트 카테고리 펼치기"
+        aria-expanded={open}
+        className="rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <ChevronDown
+          className={cn("size-4 transition-transform", open && "rotate-180")}
+        />
+      </button>
+      {open ? (
+        <div className="absolute left-0 top-full z-50 mt-1 w-40 rounded-lg border bg-popover p-1 shadow-md">
+          {insightMenu.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/insights?topic=${c.slug}`}
+              onClick={() => setOpen(false)}
+              className="block rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              {c.title}
+            </Link>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// 모바일 Sheet: 인사이트 — 클릭하면 펼쳐지는 카테고리(기본 접힘)
+function MobileInsights({ onNavigate }: { onNavigate: () => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <Link
+          href="/insights"
+          onClick={onNavigate}
+          className="flex-1 rounded-md px-3 py-2.5 text-base font-medium hover:bg-accent"
+        >
+          인사이트
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-label="인사이트 카테고리 펼치기"
+          aria-expanded={open}
+          className="rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-foreground"
+        >
+          <ChevronDown
+            className={cn("size-4 transition-transform", open && "rotate-180")}
+          />
+        </button>
+      </div>
+      {open
+        ? insightMenu.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/insights?topic=${c.slug}`}
+              onClick={onNavigate}
+              className="block rounded-md py-2 pr-3 pl-7 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+            >
+              {c.title}
+            </Link>
+          ))
+        : null}
+    </div>
+  );
+}
+
 function Logo() {
   return (
     <Link
@@ -172,37 +277,20 @@ export function SiteHeader({
         <nav className="ml-4 hidden items-center gap-0.5 md:flex">
           {siteConfig.nav.map((item) => {
             const active = pathname.startsWith(item.href);
-            const cls = cn(
-              "px-3 py-2 text-sm font-medium underline-offset-8 transition-colors",
-              active
-                ? "text-foreground underline decoration-2"
-                : "text-muted-foreground hover:text-foreground",
-            );
 
-            // 블로그: 교육단계별 카테고리 드롭다운
+            // 인사이트: 교육단계별 카테고리 — 클릭 시 펼쳐지는 드롭다운
             if (item.href === "/insights") {
               return (
-                <div key={item.href} className="group relative">
-                  <Link href={item.href} className={cls}>
-                    {item.title}
-                  </Link>
-                  <div className="invisible absolute left-0 top-full z-50 w-40 -translate-y-1 rounded-lg border bg-popover p-1 opacity-0 shadow-md transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    {siteConfig.insightCategories.map((c) => (
-                      <Link
-                        key={c.slug}
-                        href={`/insights?topic=${c.slug}`}
-                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                      >
-                        {c.title}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <InsightsNav key={item.href} active={active} title={item.title} />
               );
             }
 
             return (
-              <Link key={item.href} href={item.href} className={cls}>
+              <Link
+                key={item.href}
+                href={item.href}
+                className={navLinkCls(active)}
+              >
                 {item.title}
               </Link>
             );
@@ -250,29 +338,23 @@ export function SiteHeader({
                 <SheetTitle>{siteConfig.shortName}</SheetTitle>
               </SheetHeader>
               <nav className="mt-2 flex flex-col gap-1 px-2">
-                {siteConfig.nav.map((item) => (
-                  <div key={item.href}>
+                {siteConfig.nav.map((item) =>
+                  item.href === "/insights" ? (
+                    <MobileInsights
+                      key={item.href}
+                      onNavigate={() => setOpen(false)}
+                    />
+                  ) : (
                     <Link
+                      key={item.href}
                       href={item.href}
                       onClick={() => setOpen(false)}
                       className="block rounded-md px-3 py-2.5 text-base font-medium hover:bg-accent"
                     >
                       {item.title}
                     </Link>
-                    {item.href === "/insights"
-                      ? siteConfig.insightCategories.map((c) => (
-                          <Link
-                            key={c.slug}
-                            href={`/insights?topic=${c.slug}`}
-                            onClick={() => setOpen(false)}
-                            className="block rounded-md py-2 pl-7 pr-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
-                          >
-                            {c.title}
-                          </Link>
-                        ))
-                      : null}
-                  </div>
-                ))}
+                  ),
+                )}
 
                 <div className="my-2 h-px bg-border" />
 

@@ -20,7 +20,7 @@ import {
 const features = [
   {
     icon: BookOpen,
-    title: "블로그",
+    title: "인사이트",
     desc: "교육·학습 설계, 입시 소식, 학습법 칼럼을 꾸준히 발행합니다.",
     href: "/insights",
   },
@@ -32,8 +32,8 @@ const features = [
   },
   {
     icon: Gamepad2,
-    title: "수학게임",
-    desc: "자가진단과 수학 게임을 웹앱으로 바로 즐기고 기록을 남기세요.",
+    title: "학습게임",
+    desc: "자가진단과 학습 게임을 웹앱으로 바로 즐기고 기록을 남기세요.",
     href: "/games",
   },
   {
@@ -62,18 +62,11 @@ const stats = [
   { k: "매주", v: "새로운 학습 인사이트" },
 ];
 
+// 홈에는 핵심 원칙 1개만 노출(박스). 나머지 철학은 소개(/about)로 이동.
 const philosophy = [
   {
     title: "수동적 교육에서 능동적 학습으로",
     desc: "남이 정해둔 정답만 쫓는 수동적 학습자에서 벗어나, 질문으로 스스로 모르는 것을 찾아내고 주도적으로 학습하는 단단한 리더로 성장하도록 배움의 여정을 안내합니다.",
-  },
-  {
-    title: "AI를 도구 삼아, 스스로 배움의 지도를",
-    desc: "AI 시대의 경쟁력은 많은 정보를 머릿속에 담는 것이 아니라, AI라는 강력한 도구로 생각을 확장해 나만의 길을 개척하는 데 있습니다. 학생이 스스로 배움의 경로를 설계하도록 합니다.",
-  },
-  {
-    title: "지식을 넘어 메타인지로",
-    desc: "AI 튜터와의 다정하고 정교한 상호작용 속에서 자신이 무엇을 알고 무엇을 모르는지(메타인지)를 또렷이 인식하고, 평생 성장의 기초 체력을 기릅니다.",
   },
 ];
 
@@ -141,7 +134,7 @@ export default function HomePage() {
             index="01"
             eyebrow="What we offer"
             title="무엇을 제공하나요"
-            description="블로그·온라인수업·학습 게임부터 회원 페이지, 상담까지."
+            description="인사이트·온라인수업·학습 게임부터 회원 페이지, 상담까지."
           />
         </Reveal>
 
@@ -193,10 +186,10 @@ export default function HomePage() {
             </p>
           </Reveal>
 
-          <Stagger className="mt-12 grid gap-px overflow-hidden rounded-lg border bg-border md:grid-cols-3">
-            {philosophy.map((p) => (
-              <StaggerItem key={p.title}>
-                <div className="flex h-full flex-col bg-background p-7">
+          <Reveal>
+            <div className="mt-12 grid max-w-3xl gap-px overflow-hidden rounded-lg border bg-border">
+              {philosophy.map((p) => (
+                <div key={p.title} className="flex h-full flex-col bg-background p-7">
                   <h3 className="break-keep text-lg font-bold tracking-tight">
                     {p.title}
                   </h3>
@@ -204,9 +197,19 @@ export default function HomePage() {
                     {p.desc}
                   </p>
                 </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <Link
+              href="/about"
+              className="group mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-point"
+            >
+              러닝 큐레이터의 철학 더 보기
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 

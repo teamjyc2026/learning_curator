@@ -25,7 +25,7 @@ export default async function StudentHomePage() {
             <CardHeader>
               <Gamepad2 className="size-6 text-foreground" />
               <CardTitle className="mt-1">학습 게임</CardTitle>
-              <CardDescription>자가진단·수학 게임을 즐겨보세요.</CardDescription>
+              <CardDescription>자가진단·학습 게임을 즐겨보세요.</CardDescription>
             </CardHeader>
           </Card>
         </Link>

@@ -77,7 +77,7 @@ export default async function GamesPage() {
       <PageHeader
         eyebrow="GAMES & DIAGNOSIS"
         title="학습 게임 · 자가진단"
-        description="자가진단으로 나를 점검하고, 수학 게임으로 즐겁게 연습하세요."
+        description="자가진단으로 나를 점검하고, 학습 게임으로 즐겁게 연습하세요."
       />
 
       <div className="mx-auto max-w-6xl space-y-14 px-4 py-12">
@@ -140,7 +140,7 @@ export default async function GamesPage() {
               학습 게임
             </p>
             <h2 className="mt-1 text-2xl font-extrabold tracking-tight">
-              즐기면서 익히는 수학 게임
+              즐기면서 익히는 학습 게임
             </h2>
           </Reveal>
           {playGames.length === 0 ? (
