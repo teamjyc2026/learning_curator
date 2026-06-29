@@ -3,7 +3,11 @@ import { getAllParentQuestions } from "@/entities/parent-question";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import { Textarea } from "@/shared/ui/textarea";
-import { answerParentQuestionAction } from "./actions";
+import { ConfirmSubmitButton } from "@/shared/ui/confirm-submit-button";
+import {
+  answerParentQuestionAction,
+  deleteParentQuestionAction,
+} from "./actions";
 
 export const metadata: Metadata = { title: "학부모 상담글" };
 
@@ -56,6 +60,16 @@ export default async function AdminParentQuestionsPage() {
                 <Button type="submit" size="sm">
                   {q.answer ? "답변 수정" : "답변 등록"}
                 </Button>
+              </form>
+
+              <form
+                action={deleteParentQuestionAction}
+                className="mt-2 flex justify-end"
+              >
+                <input type="hidden" name="id" value={q.id} />
+                <ConfirmSubmitButton message="이 상담글을 삭제하시겠습니까? 되돌릴 수 없습니다.">
+                  삭제
+                </ConfirmSubmitButton>
               </form>
             </article>
           ))

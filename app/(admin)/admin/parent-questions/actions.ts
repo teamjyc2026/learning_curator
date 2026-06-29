@@ -24,3 +24,14 @@ export async function answerParentQuestionAction(formData: FormData) {
 
   revalidatePath("/admin/parent-questions");
 }
+
+export async function deleteParentQuestionAction(formData: FormData) {
+  await requireRole("admin");
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+
+  const supabase = await createClient();
+  await supabase.from("parent_questions").delete().eq("id", id);
+
+  revalidatePath("/admin/parent-questions");
+}

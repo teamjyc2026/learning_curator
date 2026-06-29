@@ -28,3 +28,14 @@ export async function updateConsultationAction(formData: FormData) {
 
   revalidatePath("/admin/consultations");
 }
+
+export async function deleteConsultationAction(formData: FormData) {
+  await requireRole("admin");
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+
+  const supabase = await createClient();
+  await supabase.from("consultations").delete().eq("id", id);
+
+  revalidatePath("/admin/consultations");
+}

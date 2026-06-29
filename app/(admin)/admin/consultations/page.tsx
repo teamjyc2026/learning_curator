@@ -4,9 +4,10 @@ import {
   consultationStatusLabel,
   getAllConsultations,
 } from "@/entities/consultation";
-import { updateConsultationAction } from "./actions";
+import { updateConsultationAction, deleteConsultationAction } from "./actions";
 import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
+import { ConfirmSubmitButton } from "@/shared/ui/confirm-submit-button";
 
 export const metadata: Metadata = { title: "상담 예약 관리" };
 
@@ -107,6 +108,16 @@ export default async function AdminConsultationsPage() {
                 <Button type="submit" size="sm">
                   저장
                 </Button>
+              </form>
+
+              <form
+                action={deleteConsultationAction}
+                className="mt-2 flex justify-end"
+              >
+                <input type="hidden" name="id" value={c.id} />
+                <ConfirmSubmitButton message="이 상담 예약을 삭제하시겠습니까? 되돌릴 수 없습니다.">
+                  삭제
+                </ConfirmSubmitButton>
               </form>
             </div>
           ))
