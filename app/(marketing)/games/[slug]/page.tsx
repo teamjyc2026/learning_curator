@@ -50,20 +50,29 @@ export default async function GameDetailPage({
           user ? (
             <FusionSelfCheck gameId={game.id} canSave />
           ) : (
-            <div className="rounded-xl border border-dashed bg-muted/20 p-12 text-center">
-              <p className="font-semibold">로그인 후 이용할 수 있어요</p>
-              <p className="mx-auto mt-2 max-w-sm break-keep text-sm text-muted-foreground">
-                융합형 사고 자가진단은 로그인한 회원만 진행할 수 있습니다. 결과는
-                내 학습기록에 저장돼요.
-              </p>
-              <Button
-                className="mt-5"
-                render={
-                  <Link href={`/login?redirect=/games/${slug}`} />
-                }
+            <div className="relative">
+              {/* 질문지 윗부분만 미리보기 — 아래로 갈수록 흐려짐, 조작 불가 */}
+              <div
+                aria-hidden
+                className="pointer-events-none max-h-[380px] select-none overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_30%,transparent_95%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_30%,transparent_95%)]"
               >
-                로그인하고 진단 시작하기
-              </Button>
+                <FusionSelfCheck gameId={game.id} canSave={false} />
+              </div>
+              {/* 흐려진 영역 위 로그인 안내 */}
+              <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 px-4 pb-2 text-center">
+                <p className="text-lg font-extrabold tracking-tight">
+                  로그인 후 진단을 시작할 수 있어요
+                </p>
+                <p className="max-w-sm break-keep text-sm text-muted-foreground">
+                  융합형 사고 자가진단은 로그인한 회원만 진행할 수 있어요. 결과는
+                  내 학습기록에 저장됩니다.
+                </p>
+                <Button
+                  render={<Link href={`/login?redirect=/games/${slug}`} />}
+                >
+                  로그인하고 진단 시작하기
+                </Button>
+              </div>
             </div>
           )
         ) : game.game_type === "embed" && game.embed_url ? (
