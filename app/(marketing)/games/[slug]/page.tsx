@@ -58,16 +58,17 @@ export default async function GameDetailPage({
               >
                 <FusionSelfCheck gameId={game.id} canSave={false} />
               </div>
-              {/* 흐려진 영역 위 로그인 안내 */}
-              <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 px-4 pb-2 text-center">
-                <p className="text-lg font-extrabold tracking-tight">
+              {/* 흐려진 영역 위 로그인 안내 — 가독성을 위해 배경 그라데이션+블러 */}
+              <div className="absolute inset-0 flex flex-col items-center justify-end gap-3 bg-gradient-to-b from-transparent via-background/85 to-background px-4 pb-6 text-center backdrop-blur-[2px]">
+                <p className="text-xl font-extrabold tracking-tight text-foreground drop-shadow-sm">
                   로그인 후 진단을 시작할 수 있어요
                 </p>
-                <p className="max-w-sm break-keep text-sm text-muted-foreground">
+                <p className="max-w-sm break-keep text-sm font-medium text-muted-foreground">
                   융합형 사고 자가진단은 로그인한 회원만 진행할 수 있어요. 결과는
                   내 학습기록에 저장됩니다.
                 </p>
                 <Button
+                  size="lg"
                   render={<Link href={`/login?redirect=/games/${slug}`} />}
                 >
                   로그인하고 진단 시작하기
