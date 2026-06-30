@@ -89,6 +89,8 @@ export async function savePostAction(
 
   revalidatePath("/admin/posts");
   revalidatePath("/insights");
+  revalidatePath(`/insights/${slug}`);
+  revalidatePath("/classes");
   redirect("/admin/posts");
 }
 

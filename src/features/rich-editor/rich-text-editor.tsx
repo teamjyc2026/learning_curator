@@ -188,6 +188,8 @@ export function RichTextEditor({
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  // 폼 전송용 HTML — 타이핑마다 onUpdate로 동기화(리렌더 의존 X)
+  const [html, setHtml] = useState(defaultValue);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -198,10 +200,13 @@ export function RichTextEditor({
       Placeholder.configure({ placeholder }),
     ],
     content: defaultValue,
+    onUpdate: ({ editor }) => setHtml(editor.getHTML()),
     editorProps: {
       attributes: {
         class:
           "prose prose-neutral max-w-none min-h-64 px-4 py-3 focus:outline-none",
+        // 본문 철자법/문법 검사(빨간 밑줄) 끄기
+        spellcheck: "false",
       },
       handlePaste(_view, event) {
         const files = event.clipboardData?.files;
@@ -276,8 +281,8 @@ export function RichTextEditor({
         onPickImage={() => fileInputRef.current?.click()}
       />
       <EditorContent editor={editor} />
-      {/* 폼 전송용 HTML 값 */}
-      <input type="hidden" name={name} value={editor.getHTML()} readOnly />
+      {/* 폼 전송용 HTML 값 (onUpdate로 동기화) */}
+      <input type="hidden" name={name} value={html} readOnly />
       <input
         ref={fileInputRef}
         type="file"
