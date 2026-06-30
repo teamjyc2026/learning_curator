@@ -204,7 +204,7 @@ export function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-neutral max-w-none min-h-64 px-4 py-3 focus:outline-none",
+          "prose prose-neutral dark:prose-invert max-w-none min-h-64 px-4 py-3 focus:outline-none",
         // 본문 철자법/문법 검사(빨간 밑줄) 끄기
         spellcheck: "false",
       },
