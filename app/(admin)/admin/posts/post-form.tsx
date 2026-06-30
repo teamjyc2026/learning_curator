@@ -17,7 +17,7 @@ import {
 import { RichTextEditor } from "@/features/rich-editor";
 
 const statusLabel: Record<string, string> = {
-  draft: "임시저장(초안)",
+  draft: "비공개(초안)",
   published: "발행됨",
   archived: "보관",
 };
@@ -125,7 +125,7 @@ export function PostForm({
           variant="outline"
           disabled={pending}
         >
-          임시저장
+          비공개 저장
         </Button>
         {post ? (
           <span className="ml-1 text-sm text-muted-foreground">

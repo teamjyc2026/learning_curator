@@ -9,7 +9,7 @@ import { Badge } from "@/shared/ui/badge";
 export const metadata: Metadata = { title: "블로그 관리" };
 
 const statusLabel: Record<string, string> = {
-  draft: "초안",
+  draft: "비공개",
   published: "발행",
   archived: "보관",
 };
