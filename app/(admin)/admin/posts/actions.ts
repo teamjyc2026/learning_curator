@@ -28,7 +28,15 @@ export async function savePostAction(
   const content_format = String(formData.get("content_format") ?? "html");
   const categoryRaw = String(formData.get("category_id") ?? "").trim();
   const category_id = categoryRaw && categoryRaw !== "none" ? categoryRaw : null;
-  const status = String(formData.get("status") ?? "draft") as PostStatus;
+  // 발행/임시저장 버튼(intent)으로 상태 결정. (구버전 status 셀렉트도 폴백 지원)
+  const intent = String(formData.get("intent") ?? "").trim();
+  const status = (
+    intent === "publish"
+      ? "published"
+      : intent === "draft"
+        ? "draft"
+        : String(formData.get("status") ?? "draft")
+  ) as PostStatus;
   const tags = String(formData.get("tags") ?? "")
     .split(",")
     .map((t) => t.trim())

@@ -16,6 +16,12 @@ import {
 } from "@/shared/ui/select";
 import { RichTextEditor } from "@/features/rich-editor";
 
+const statusLabel: Record<string, string> = {
+  draft: "임시저장(초안)",
+  published: "발행됨",
+  archived: "보관",
+};
+
 export function PostForm({
   categories,
   post,
@@ -85,32 +91,13 @@ export function PostForm({
         <input type="hidden" name="content_format" value="html" />
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <Label htmlFor="tags">태그 (쉼표로 구분)</Label>
-          <Input
-            id="tags"
-            name="tags"
-            defaultValue={(post?.tags ?? []).join(", ")}
-          />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="status">상태</Label>
-          <Select
-            name="status"
-            defaultValue={post?.status ?? "draft"}
-            items={{ draft: "초안", published: "발행", archived: "보관" }}
-          >
-            <SelectTrigger id="status">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="draft">초안</SelectItem>
-              <SelectItem value="published">발행</SelectItem>
-              <SelectItem value="archived">보관</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="space-y-1.5">
+        <Label htmlFor="tags">태그 (쉼표로 구분)</Label>
+        <Input
+          id="tags"
+          name="tags"
+          defaultValue={(post?.tags ?? []).join(", ")}
+        />
       </div>
 
       <div className="space-y-1.5">
@@ -122,10 +109,29 @@ export function PostForm({
         <p className="text-sm text-destructive">{state.error}</p>
       ) : null}
 
-      <div className="flex gap-2">
-        <Button type="submit" disabled={pending}>
-          {pending ? "저장 중…" : "저장"}
+      <div className="flex flex-wrap items-center gap-2 border-t pt-5">
+        <Button
+          type="submit"
+          name="intent"
+          value="publish"
+          disabled={pending}
+        >
+          {pending ? "저장 중…" : post?.status === "published" ? "발행 반영" : "발행하기"}
         </Button>
+        <Button
+          type="submit"
+          name="intent"
+          value="draft"
+          variant="outline"
+          disabled={pending}
+        >
+          임시저장
+        </Button>
+        {post ? (
+          <span className="ml-1 text-sm text-muted-foreground">
+            현재 상태: {statusLabel[post.status] ?? post.status}
+          </span>
+        ) : null}
       </div>
     </form>
   );
