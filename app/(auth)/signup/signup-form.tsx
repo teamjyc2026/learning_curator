@@ -88,9 +88,35 @@ export function SignupForm() {
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="phone">연락처 (선택)</Label>
-        <Input id="phone" name="phone" type="tel" inputMode="tel" />
+        <Label htmlFor="phone">연락처 *</Label>
+        <Input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          required
+          autoComplete="tel"
+          placeholder="010-0000-0000"
+        />
       </div>
+
+      <label className="flex items-start gap-2.5 rounded-lg border bg-muted/30 p-3 text-sm">
+        <input
+          type="checkbox"
+          name="privacy_consent"
+          required
+          className="mt-0.5 size-4 shrink-0 accent-primary"
+        />
+        <span className="break-keep">
+          <b className="text-foreground">개인정보 수집·이용</b>에 동의합니다.{" "}
+          <span className="text-destructive">*</span>
+          <span className="mt-1 block text-xs text-muted-foreground">
+            수집 항목: 닉네임·이메일·연락처(선택 시 프로필 사진) · 이용 목적: 회원
+            식별과 학습 코칭·공지 안내 · 보유 기간: 회원 탈퇴 시까지. 동의를
+            거부할 수 있으나, 이 경우 회원가입이 제한됩니다.
+          </span>
+        </span>
+      </label>
 
       {state?.error ? (
         <p className="text-sm text-destructive">{state.error}</p>

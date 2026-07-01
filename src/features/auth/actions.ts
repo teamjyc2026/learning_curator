@@ -48,6 +48,7 @@ export async function signupAction(
   const nickname = String(formData.get("nickname") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
   const role = String(formData.get("role") ?? "");
+  const consent = formData.get("privacy_consent") === "on";
   const avatar = formData.get("avatar");
 
   if (role !== "parent" && role !== "student") {
@@ -58,12 +59,24 @@ export async function signupAction(
   if (password.length < 8) {
     return { error: "비밀번호는 8자 이상이어야 합니다." };
   }
+  if (!phone) return { error: "연락처를 입력해 주세요." };
+  if (!consent) {
+    return { error: "개인정보 수집·이용에 동의해 주세요." };
+  }
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    options: { data: { role, nickname, phone } },
+    options: {
+      data: {
+        role,
+        nickname,
+        phone,
+        privacy_consent: true,
+        privacy_consent_at: new Date().toISOString(),
+      },
+    },
   });
 
   if (error) {
