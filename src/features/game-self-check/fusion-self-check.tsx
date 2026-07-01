@@ -250,7 +250,7 @@ export function FusionSelfCheck({
 
       {/* progress + cta */}
       <div className="sticky bottom-4 z-10 flex items-center gap-3 rounded-xl border bg-background/95 p-3 shadow-sm backdrop-blur">
-        <Radar size={44} fracs={fracs} />
+        <Radar size={76} fracs={fracs} className="flex-none" />
         <div className="min-w-0 flex-1">
           <div className="h-2 overflow-hidden rounded-full bg-muted">
             <div
