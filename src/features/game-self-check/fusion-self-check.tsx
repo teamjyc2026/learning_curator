@@ -46,10 +46,12 @@ function Radar({
   size,
   fracs,
   labels = false,
+  className,
 }: {
   size: number;
   fracs: number[];
   labels?: boolean;
+  className?: string;
 }) {
   const cx = size / 2;
   const cy = size / 2;
@@ -78,7 +80,14 @@ function Radar({
     " ",
   );
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label="사고 나침반">
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      role="img"
+      aria-label="사고 나침반"
+      className={className}
+    >
       {rings}
       {spokes}
       <polygon
@@ -277,8 +286,13 @@ export function FusionSelfCheck({
               비춰본 것입니다.
             </p>
 
-            <div className="my-4 grid place-items-center">
-              <Radar size={260} fracs={fracs} labels />
+            <div className="my-5 grid place-items-center">
+              <Radar
+                size={340}
+                fracs={fracs}
+                labels
+                className="h-auto w-full max-w-[380px]"
+              />
             </div>
 
             <div className="space-y-2">
