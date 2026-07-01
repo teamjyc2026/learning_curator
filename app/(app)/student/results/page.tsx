@@ -45,7 +45,7 @@ export default async function StudentResultsPage() {
                     융합형 사고 자가진단
                     {typeof data.total === "number" ? (
                       <span className="ml-2 text-sm text-muted-foreground">
-                        총점 {data.total}/30
+                        총점 {data.total}/40
                       </span>
                     ) : null}
                   </p>

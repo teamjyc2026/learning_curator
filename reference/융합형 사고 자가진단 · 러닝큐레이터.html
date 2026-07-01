@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!-- saved from url=(0289)file:///C:/Users/%EC%A0%95%EC%A7%80%EC%97%B0/OneDrive/%EB%8C%80%EC%B9%98%EB%8F%99%EC%85%88%EC%88%98%ED%95%99/Documents/%EC%86%8C%ED%81%AC%EB%9D%BC%ED%85%8C%EC%8A%A4/%EA%BE%B8%EA%B7%B8%EA%B0%95%EC%9D%98/%EC%9C%B5%ED%95%A9%ED%98%95%EC%82%AC%EA%B3%A0_%EC%9E%90%EA%B0%80%EC%A7%84%EB%8B%A8.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>융합형 사고 자가진단 · 러닝큐레이터</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+  :root{
+    --ink:#15172B; --ink2:#3A3E5C; --sub:#6E7390;
+    --paper:#F6F5F1; --card:#FFFFFF; --line:#E7E6E0; --line2:#D9D8D1;
+    --accent:#3B5BDB; --accentb:#EAEFFE;
+    --s1:#3B5BDB; --s2:#0CA678; --s3:#7048E8; --s4:#E8830C; --s5:#E03A5B;
+    --sans:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+    --serif:'Iowan Old Style','Palatino Linotype','Georgia',serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.55;
+    -webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 12% -5%, #fff 0, transparent 38%);}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 18px 130px;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  header{margin:6px 2px 22px;}
+  .brand{display:flex;align-items:center;gap:9px;font-size:.74rem;font-weight:800;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--s1);box-shadow:10px 0 0 -1px var(--s3),20px 0 0 -1px var(--s5);}
+  h1{font-size:clamp(1.85rem,6.4vw,2.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.12;margin:.42em 0 .34em;word-break:keep-all;}
+  h1 em{font-style:normal;color:var(--accent);background:linear-gradient(transparent 62%,var(--accentb) 62%);padding:0 .04em;}
+  .lead{color:var(--ink2);font-size:clamp(.96rem,2.7vw,1.07rem);word-break:keep-all;max-width:60ch;}
+  .src{margin-top:13px;font-size:.8rem;color:var(--sub);word-break:keep-all;line-height:1.5;}
+  .src b{color:var(--ink2);font-weight:700;}
+
+  .compass{position:sticky;top:0;z-index:20;margin:22px 0 8px;background:rgba(246,245,241,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 2px;}
+  .compass-inner{display:flex;align-items:center;gap:16px;}
+  .radar{flex:0 0 auto;}
+  .compass-meta{flex:1;min-width:0;}
+  .compass-meta .ct{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--sub);text-transform:uppercase;}
+  .compass-meta .cv{font-family:var(--serif);font-size:1.7rem;font-weight:700;line-height:1;margin:.12em 0 .18em;}
+  .compass-meta .cv span{font-size:.9rem;color:var(--sub);font-family:var(--sans);font-weight:600;}
+  .bar{height:7px;border-radius:99px;background:var(--line2);overflow:hidden;}
+  .bar > i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--s1),var(--s3),var(--s5));transition:width .4s ease;}
+  .barlabel{font-size:.74rem;color:var(--sub);margin-top:5px;}
+
+  .note{margin:20px 0 8px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:13px 15px;font-size:.9rem;color:var(--ink2);word-break:keep-all;}
+  .note b{color:var(--ink);}
+
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px 18px;margin:14px 0;box-shadow:0 1px 0 rgba(21,23,43,.02);scroll-margin-top:118px;}
+  .qcard-head{display:flex;gap:13px;align-items:flex-start;margin-bottom:13px;}
+  .qnum{flex:0 0 auto;font-family:var(--serif);font-size:1.18rem;font-weight:700;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;background:var(--ink);}
+  .q-text{flex:1;font-size:1.02rem;font-weight:600;line-height:1.5;padding-top:6px;word-break:keep-all;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opts button{width:100%;text-align:left;border:1.5px solid var(--line2);background:#fff;border-radius:12px;padding:12px 13px;cursor:pointer;font-family:inherit;font-size:.92rem;color:var(--ink2);display:flex;gap:11px;align-items:flex-start;line-height:1.42;word-break:keep-all;transition:border-color .14s,background .14s,transform .12s,color .14s;}
+  .opts button .mk{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--line2);margin-top:1px;display:grid;place-items:center;transition:all .14s;}
+  .opts button .mk::after{content:"";width:8px;height:8px;border-radius:50%;background:transparent;transition:background .14s;}
+  .opts button:hover{border-color:var(--ink2);transform:translateY(-1px);}
+  .opts button.on{color:#fff;border-color:transparent;background:var(--accent);}
+  .opts button.on .mk{border-color:rgba(255,255,255,.85);}
+  .opts button.on .mk::after{background:#fff;}
+  .opts button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+
+  #result{margin-top:22px;scroll-margin-top:128px;}
+  .result-card{background:var(--ink);color:#fff;border-radius:22px;padding:26px 22px;background-image:radial-gradient(circle at 90% 5%, #2a2d52 0, transparent 55%);}
+  .result-card .rk{font-size:.74rem;font-weight:800;letter-spacing:.16em;color:#9aa0d4;text-transform:uppercase;}
+  .result-card h2{font-size:clamp(1.5rem,5.5vw,2rem);font-weight:800;letter-spacing:-.01em;margin:.32em 0 .1em;line-height:1.18;word-break:keep-all;}
+  .result-card .total{font-family:var(--serif);font-size:1.05rem;color:#c7cbf0;margin-bottom:14px;}
+  .result-card .total b{font-size:1.5rem;color:#fff;}
+  .reveal{font-size:.82rem;color:#b9bdec;margin-bottom:4px;word-break:keep-all;}
+  .bigradar{display:grid;place-items:center;margin:6px 0 18px;}
+  .callouts{display:grid;gap:9px;}
+  .callout{display:flex;gap:11px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:12px 14px;}
+  .callout .ci{flex:0 0 auto;font-size:.7rem;font-weight:800;letter-spacing:.04em;padding:4px 9px;border-radius:7px;margin-top:1px;}
+  .callout .cb{font-size:.9rem;color:#e8eaff;word-break:keep-all;}
+  .callout .cb b{color:#fff;}
+
+  .breakdown{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px;}
+  .breakdown h3{font-size:.95rem;font-weight:800;margin-bottom:5px;color:var(--ink);}
+  .breakdown .bh{font-size:.8rem;color:var(--sub);margin-bottom:12px;word-break:keep-all;}
+  .row{display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid var(--line);}
+  .row:first-of-type{border-top:none;}
+  .row .rn{flex:0 0 auto;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:700;font-size:.85rem;}
+  .row .rname{flex:0 0 116px;font-size:.86rem;font-weight:700;word-break:keep-all;line-height:1.2;}
+  .row .rbar{flex:1;height:9px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .row .rbar > i{display:block;height:100%;border-radius:99px;width:0;transition:width .6s cubic-bezier(.2,.7,.2,1);}
+  .row .rscore{flex:0 0 auto;width:64px;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+  .row .rscore .sc{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--ink2);}
+  .row .rscore .sc em{font-style:normal;font-size:.7rem;color:var(--sub);}
+  .row .rscore .lv{font-size:.66rem;font-weight:800;padding:2px 7px;border-radius:99px;white-space:nowrap;color:#fff;}
+
+  .disc{margin-top:14px;font-size:.78rem;color:var(--sub);line-height:1.55;word-break:keep-all;background:var(--card);border:1px dashed var(--line2);border-radius:12px;padding:13px 14px;}
+  .disc b{color:var(--ink2);}
+
+  .actionbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(246,245,241,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:11px 18px calc(11px + env(safe-area-inset-bottom,0));}
+  .actionbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:11px;}
+  .ab-status{flex:1;font-size:.84rem;color:var(--sub);font-weight:600;}
+  .ab-status b{color:var(--ink);}
+  .btn{appearance:none;border:none;font-family:inherit;font-weight:800;font-size:.94rem;padding:13px 20px;border-radius:13px;cursor:pointer;transition:transform .12s,opacity .12s,box-shadow .12s;white-space:nowrap;}
+  .btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+  .btn-primary{background:var(--ink);color:#fff;box-shadow:0 6px 18px rgba(21,23,43,.22);}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none;}
+  .btn-ghost{background:transparent;color:var(--ink2);border:1.5px solid var(--line2);}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .hidden{display:none !important;}
+
+  @media (max-width:430px){
+    .row .rname{flex-basis:88px;font-size:.8rem;}
+    .compass-inner{gap:11px;}
+    .opts button{font-size:.88rem;}
+    .q-text{font-size:.98rem;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+  @media print{
+    body{background:#fff;}
+    .actionbar,.compass{display:none !important;}
+    .wrap{padding:0;max-width:100%;}
+    .qcard,.breakdown,.result-card{break-inside:avoid;box-shadow:none;}
+    .result-card{background:#fff;color:#000;border:1.5px solid #000;}
+    .result-card .rk,.result-card .total,.result-card .total b,.reveal{color:#333;}
+    .result-card h2{color:#000;}
+    .callout{background:#f3f3f3;border-color:#ccc;}
+    .callout .cb,.callout .cb b{color:#000;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand"><span class="dot"></span> 러닝큐레이터 · 자가진단</div>
+    <h1>나의 <em>융합형 사고</em><br>나침반 찾기</h1>
+    <p class="lead">‘가장 많이 아는 사람’이 아니라 ‘가장 많이 연결한 사람’의 시대입니다. 생활 속 10가지 상황에서, <b>진짜 나라면 어떻게 할지</b> 골라보세요. 맞고 틀린 답은 없습니다.</p>
+    <p class="src">근거: <b>OECD Learning Compass 2030</b> · <b>PISA 2022 창의적 사고</b> · <b>Lattuca 등(2013) 융합역량 척도</b> · <b>이서영·권상집(2019) 융합인재 측정도구</b>가 공통으로 가리키는 역량을 생활 장면으로 풀어낸 관찰 도구입니다.</p>
+  </header>
+
+  <div class="compass">
+    <div class="compass-inner">
+      <div class="radar" id="miniRadar"><svg width="86" height="86" viewBox="0 0 86 86" role="img" aria-label="사고 나침반">
+    <polygon points="43,34.4 51.179086040138316,40.342453848375456 48.05495316971527,49.95754615162455 37.94504683028473,49.95754615162455 34.820913959861684,40.34245384837545" fill="none" stroke="#D9D8D1" stroke-width="1"></polygon><polygon points="43,25.8 59.35817208027664,37.684907696750905 53.10990633943054,56.9150923032491 32.89009366056946,56.9150923032491 26.64182791972336,37.6849076967509" fill="none" stroke="#D9D8D1" stroke-width="1"></polygon><polygon points="43,17.200000000000003 67.53725812041496,35.02736154512636 58.164859509145806,63.87263845487364 27.835140490854197,63.87263845487364 18.462741879585042,35.02736154512635" fill="none" stroke="#D9D8D1" stroke-width="1"></polygon><polygon points="43,8.600000000000001 75.71634416055328,32.36981539350181 63.219812678861075,70.8301846064982 22.78018732113893,70.8301846064982 10.283655839446723,32.369815393501796" fill="none" stroke="#D9D8D1" stroke-width="1"></polygon><line x1="43" y1="43" x2="43" y2="8.600000000000001" stroke="#D9D8D1" stroke-width="1"></line><line x1="43" y1="43" x2="75.71634416055328" y2="32.36981539350181" stroke="#D9D8D1" stroke-width="1"></line><line x1="43" y1="43" x2="63.219812678861075" y2="70.8301846064982" stroke="#D9D8D1" stroke-width="1"></line><line x1="43" y1="43" x2="22.78018732113893" y2="70.8301846064982" stroke="#D9D8D1" stroke-width="1"></line><line x1="43" y1="43" x2="10.283655839446723" y2="32.369815393501796" stroke="#D9D8D1" stroke-width="1"></line><polygon points="43,42.9656 43.032716344160555,42.9893698153935 43.02021981267886,43.0278301846065 42.97978018732114,43.0278301846065 42.967283655839445,42.9893698153935" fill="rgba(59,91,219,.16)" stroke="#3B5BDB" stroke-width="2" stroke-linejoin="round"></polygon><circle cx="43" cy="42.9656" r="2.4" fill="#3B5BDB"></circle><circle cx="43.032716344160555" cy="42.9893698153935" r="2.4" fill="#0CA678"></circle><circle cx="43.02021981267886" cy="43.0278301846065" r="2.4" fill="#7048E8"></circle><circle cx="42.97978018732114" cy="43.0278301846065" r="2.4" fill="#E8830C"></circle><circle cx="42.967283655839445" cy="42.9893698153935" r="2.4" fill="#E03A5B"></circle></svg></div>
+      <div class="compass-meta">
+        <div class="ct">실시간 사고 나침반</div>
+        <div class="cv"><span id="answered">0</span><span> / 10 상황</span></div>
+        <div class="bar"><i id="progFill" style="width: 0%;"></i></div>
+        <div class="barlabel" id="progLabel">상황에 답할수록 나침반이 채워집니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">멋진 답이 아니라 <b>평소 내 모습</b>을 골라주세요. 각 상황이 무엇을 보는지는 일부러 숨겨 두었습니다 — <b>다 풀고 나면 결과에서</b> 알려드려요.</div>
+
+  <div id="questions"><section class="qcard" id="q1">
+    <div class="qcard-head"><div class="qnum">1</div><div class="q-text">수학 문제를 풀다가 갑자기 좋아하는 축구(또는 게임)가 떠올랐다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s1_1" data-score="2">
+      <span class="mk"></span><span>딴생각이라 여기고 곧장 문제로 돌아간다</span>
+    </button>
+    <button type="button" data-id="s1_1" data-score="1">
+      <span class="mk"></span><span>집중이 깨져서 폰을 켠다</span>
+    </button>
+    <button type="button" data-id="s1_1" data-score="4">
+      <span class="mk"></span><span>축구 전술이나 게임 전략에 빗대어 그 수학 개념을 이해해본다</span>
+    </button>
+    <button type="button" data-id="s1_1" data-score="3">
+      <span class="mk"></span><span>‘어, 좀 비슷한데?’ 하고 잠깐 생각하다 만다</span>
+    </button></div></section><section class="qcard" id="q2">
+    <div class="qcard-head"><div class="qnum">2</div><div class="q-text">모둠 과제에서 두 친구가 서로 다른 주제를 고집하며 다툰다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s3_0" data-score="1">
+      <span class="mk"></span><span>더 친한 친구 편을 든다</span>
+    </button>
+    <button type="button" data-id="s3_0" data-score="4">
+      <span class="mk"></span><span>두 주제의 좋은 점을 합쳐 더 나은 하나의 주제로 제안한다</span>
+    </button>
+    <button type="button" data-id="s3_0" data-score="3">
+      <span class="mk"></span><span>둘 다 일리 있다고 보고 공통점을 찾아 정리해본다</span>
+    </button>
+    <button type="button" data-id="s3_0" data-score="2">
+      <span class="mk"></span><span>다수결로 빨리 정하자고 한다</span>
+    </button></div></section><section class="qcard" id="q3">
+    <div class="qcard-head"><div class="qnum">3</div><div class="q-text">과학 시간에 ‘지렛대 원리’를 배웠다. 집에서 무거운 가구를 옮겨야 할 때 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s2_0" data-score="2">
+      <span class="mk"></span><span>그냥 힘으로 밀거나 든다</span>
+    </button>
+    <button type="button" data-id="s2_0" data-score="1">
+      <span class="mk"></span><span>옮기는 일과 수업이 연결된다는 생각 자체를 안 해봤다</span>
+    </button>
+    <button type="button" data-id="s2_0" data-score="4">
+      <span class="mk"></span><span>배운 지렛대 원리를 떠올려 막대·받침을 이용해 옮겨본다</span>
+    </button>
+    <button type="button" data-id="s2_0" data-score="3">
+      <span class="mk"></span><span>‘이거 과학에서 본 건데’ 하며 비슷하게 시도해본다</span>
+    </button></div></section><section class="qcard" id="q4">
+    <div class="qcard-head"><div class="qnum">4</div><div class="q-text">폰 게임이나 앱을 하다가 “이건 대체 어떻게 만든 걸까?”가 궁금해졌다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s5_1" data-score="3">
+      <span class="mk"></span><span>영상이나 글을 하나 찾아보고 만다</span>
+    </button>
+    <button type="button" data-id="s5_1" data-score="2">
+      <span class="mk"></span><span>궁금하긴 한데 찾아보진 않는다</span>
+    </button>
+    <button type="button" data-id="s5_1" data-score="1">
+      <span class="mk"></span><span>그냥 계속 게임만 한다</span>
+    </button>
+    <button type="button" data-id="s5_1" data-score="4">
+      <span class="mk"></span><span>직접 찾아보거나 비슷한 걸 만들어보려 시도한다</span>
+    </button></div></section><section class="qcard" id="q5">
+    <div class="qcard-head"><div class="qnum">5</div><div class="q-text">수업 중 선생님이 “이건 시험엔 안 나와”라고 한 내용인데, 궁금증이 생겼다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s5_0" data-score="4">
+      <span class="mk"></span><span>따로 찾아보거나 선생님께 질문해 끝까지 알아본다</span>
+    </button>
+    <button type="button" data-id="s5_0" data-score="2">
+      <span class="mk"></span><span>시험에 안 나오니 그냥 넘긴다</span>
+    </button>
+    <button type="button" data-id="s5_0" data-score="3">
+      <span class="mk"></span><span>일단 메모해두고 나중에 찾아본다</span>
+    </button>
+    <button type="button" data-id="s5_0" data-score="1">
+      <span class="mk"></span><span>금세 잊어버린다</span>
+    </button></div></section><section class="qcard" id="q6">
+    <div class="qcard-head"><div class="qnum">6</div><div class="q-text">친구와 영화 평가가 정반대다. 나는 별로였는데 친구는 인생영화라고 한다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s3_1" data-score="1">
+      <span class="mk"></span><span>내 생각이 맞다고 계속 주장한다</span>
+    </button>
+    <button type="button" data-id="s3_1" data-score="2">
+      <span class="mk"></span><span>사람마다 다르지 뭐, 하고 넘긴다</span>
+    </button>
+    <button type="button" data-id="s3_1" data-score="3">
+      <span class="mk"></span><span>친구 말에도 맞는 부분이 있나 한두 가지는 인정한다</span>
+    </button>
+    <button type="button" data-id="s3_1" data-score="4">
+      <span class="mk"></span><span>친구가 왜 좋았는지 끝까지 들어보고, 내가 놓친 점이 있는지 본다</span>
+    </button></div></section><section class="qcard" id="q7">
+    <div class="qcard-head"><div class="qnum">7</div><div class="q-text">게임에서 자원을 효율적으로 모으는 법을 터득했다. 시험기간 공부 계획을 짤 때 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s2_1" data-score="2">
+      <span class="mk"></span><span>게임은 게임, 공부는 공부라 따로 생각한다</span>
+    </button>
+    <button type="button" data-id="s2_1" data-score="1">
+      <span class="mk"></span><span>계획 없이 그냥 닥치는 대로 한다</span>
+    </button>
+    <button type="button" data-id="s2_1" data-score="3">
+      <span class="mk"></span><span>비슷하게 해볼까 싶어 일부만 적용한다</span>
+    </button>
+    <button type="button" data-id="s2_1" data-score="4">
+      <span class="mk"></span><span>게임에서 쓰던 ‘우선순위·효율’ 방식을 공부 계획에 그대로 적용한다</span>
+    </button></div></section><section class="qcard" id="q8">
+    <div class="qcard-head"><div class="qnum">8</div><div class="q-text">발표에서 어려운 내용을 친구들에게 이해시켜야 한다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s4_1" data-score="4">
+      <span class="mk"></span><span>‘이건 마치 ○○ 같다’는 비유를 만들어 핵심을 전한다</span>
+    </button>
+    <button type="button" data-id="s4_1" data-score="2">
+      <span class="mk"></span><span>교과서 문장을 그대로 읽는다</span>
+    </button>
+    <button type="button" data-id="s4_1" data-score="3">
+      <span class="mk"></span><span>그림이나 도식을 그려 보여준다</span>
+    </button>
+    <button type="button" data-id="s4_1" data-score="1">
+      <span class="mk"></span><span>최대한 짧게 끝내버린다</span>
+    </button></div></section><section class="qcard" id="q9">
+    <div class="qcard-head"><div class="qnum">9</div><div class="q-text">반 축제 부스를 정하는 회의. 다들 ‘뽑기’, ‘타로’ 같은 뻔한 것만 말한다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s1_0" data-score="2">
+      <span class="mk"></span><span>‘축제 부스 아이디어’를 검색해 괜찮은 걸 하나 고른다</span>
+    </button>
+    <button type="button" data-id="s1_0" data-score="1">
+      <span class="mk"></span><span>친구들이 정하는 대로 따라간다</span>
+    </button>
+    <button type="button" data-id="s1_0" data-score="4">
+      <span class="mk"></span><span>요즘 빠진 게임·웹툰·아이돌을 부스 콘셉트로 엮어 새로운 걸 제안한다</span>
+    </button>
+    <button type="button" data-id="s1_0" data-score="3">
+      <span class="mk"></span><span>작년에 인기 많았던 부스 두 개를 합쳐 하나로 만든다</span>
+    </button></div></section><section class="qcard" id="q10">
+    <div class="qcard-head"><div class="qnum">10</div><div class="q-text">동생이 “CPU가 뭐야?”처럼 어려운 걸 물어본다. 나라면?</div></div>
+    <div class="opts">
+    <button type="button" data-id="s4_0" data-score="1">
+      <span class="mk"></span><span>“그냥 검색해봐” 한다</span>
+    </button>
+    <button type="button" data-id="s4_0" data-score="3">
+      <span class="mk"></span><span>예를 하나 들어 설명하려 애써본다</span>
+    </button>
+    <button type="button" data-id="s4_0" data-score="4">
+      <span class="mk"></span><span>“뇌 같은 거야”처럼 쉬운 것에 빗대어 설명한다</span>
+    </button>
+    <button type="button" data-id="s4_0" data-score="2">
+      <span class="mk"></span><span>아는 대로 용어를 그대로 설명한다</span>
+    </button></div></section></div>
+  <div id="result" class="hidden"></div>
+</div>
+
+<div class="actionbar">
+  <div class="actionbar-in">
+    <div class="ab-status" id="abStatus"><b>0</b>개 응답 · 10개 모두 답하면 결과가 열립니다</div>
+    <button class="btn btn-ghost" id="resetBtn">다시하기</button>
+    <button class="btn btn-primary" id="resultBtn" disabled="">결과 보기</button>
+  </div>
+</div>
+
+<script>
+/* ---- signal metadata (revealed only in result) ---- */
+const SIGNALS = [
+  { key:'s1', num:'1', color:'var(--s1)', title:'강제 연결', en:'Cross-domain Connection',
+    grow:'오늘 배운 것 하나를 좋아하는 것(게임·운동·노래)과 “억지로” 엮어 한 문장 만들어보기.',
+    qs:[
+      { p:'반 축제 부스를 정하는 회의. 다들 ‘뽑기’, ‘타로’ 같은 뻔한 것만 말한다. 나라면?',
+        o:[ {t:'요즘 빠진 게임·웹툰·아이돌을 부스 콘셉트로 엮어 새로운 걸 제안한다', s:4},
+            {t:'‘축제 부스 아이디어’를 검색해 괜찮은 걸 하나 고른다', s:2},
+            {t:'작년에 인기 많았던 부스 두 개를 합쳐 하나로 만든다', s:3},
+            {t:'친구들이 정하는 대로 따라간다', s:1} ] },
+      { p:'수학 문제를 풀다가 갑자기 좋아하는 축구(또는 게임)가 떠올랐다. 나라면?',
+        o:[ {t:'딴생각이라 여기고 곧장 문제로 돌아간다', s:2},
+            {t:'축구 전술이나 게임 전략에 빗대어 그 수학 개념을 이해해본다', s:4},
+            {t:'‘어, 좀 비슷한데?’ 하고 잠깐 생각하다 만다', s:3},
+            {t:'집중이 깨져서 폰을 켠다', s:1} ] } ]},
+  { key:'s2', num:'2', color:'var(--s2)', title:'지식의 전이', en:'Knowledge Transfer',
+    grow:'새로운 일을 만나면 “전에 배운 것 중 비슷한 게 있었나?”를 먼저 떠올려보기.',
+    qs:[
+      { p:'과학 시간에 ‘지렛대 원리’를 배웠다. 집에서 무거운 가구를 옮겨야 할 때 나라면?',
+        o:[ {t:'옮기는 일과 수업이 연결된다는 생각 자체를 안 해봤다', s:1},
+            {t:'배운 지렛대 원리를 떠올려 막대·받침을 이용해 옮겨본다', s:4},
+            {t:'‘이거 과학에서 본 건데’ 하며 비슷하게 시도해본다', s:3},
+            {t:'그냥 힘으로 밀거나 든다', s:2} ] },
+      { p:'게임에서 자원을 효율적으로 모으는 법을 터득했다. 시험기간 공부 계획을 짤 때 나라면?',
+        o:[ {t:'게임에서 쓰던 ‘우선순위·효율’ 방식을 공부 계획에 그대로 적용한다', s:4},
+            {t:'게임은 게임, 공부는 공부라 따로 생각한다', s:2},
+            {t:'비슷하게 해볼까 싶어 일부만 적용한다', s:3},
+            {t:'계획 없이 그냥 닥치는 대로 한다', s:1} ] } ]},
+  { key:'s3', num:'3', color:'var(--s3)', title:'다관점 종합', en:'Multi-perspective Synthesis',
+    grow:'다음 토론에서 “반대 의견의 가장 좋은 점”을 먼저 한 가지 말해보기.',
+    qs:[
+      { p:'모둠 과제에서 두 친구가 서로 다른 주제를 고집하며 다툰다. 나라면?',
+        o:[ {t:'다수결로 빨리 정하자고 한다', s:2},
+            {t:'두 주제의 좋은 점을 합쳐 더 나은 하나의 주제로 제안한다', s:4},
+            {t:'더 친한 친구 편을 든다', s:1},
+            {t:'둘 다 일리 있다고 보고 공통점을 찾아 정리해본다', s:3} ] },
+      { p:'친구와 영화 평가가 정반대다. 나는 별로였는데 친구는 인생영화라고 한다. 나라면?',
+        o:[ {t:'친구가 왜 좋았는지 끝까지 들어보고, 내가 놓친 점이 있는지 본다', s:4},
+            {t:'내 생각이 맞다고 계속 주장한다', s:1},
+            {t:'사람마다 다르지 뭐, 하고 넘긴다', s:2},
+            {t:'친구 말에도 맞는 부분이 있나 한두 가지는 인정한다', s:3} ] } ]},
+  { key:'s4', num:'4', color:'var(--s4)', title:'비유적 추상화', en:'Analogical Abstraction',
+    grow:'어려운 개념 하나를 “이건 마치 ○○ 같아”로 나만의 비유로 바꿔보기.',
+    qs:[
+      { p:'동생이 “CPU가 뭐야?”처럼 어려운 걸 물어본다. 나라면?',
+        o:[ {t:'“뇌 같은 거야”처럼 쉬운 것에 빗대어 설명한다', s:4},
+            {t:'“그냥 검색해봐” 한다', s:1},
+            {t:'아는 대로 용어를 그대로 설명한다', s:2},
+            {t:'예를 하나 들어 설명하려 애써본다', s:3} ] },
+      { p:'발표에서 어려운 내용을 친구들에게 이해시켜야 한다. 나라면?',
+        o:[ {t:'교과서 문장을 그대로 읽는다', s:2},
+            {t:'‘이건 마치 ○○ 같다’는 비유를 만들어 핵심을 전한다', s:4},
+            {t:'최대한 짧게 끝내버린다', s:1},
+            {t:'그림이나 도식을 그려 보여준다', s:3} ] } ]},
+  { key:'s5', num:'5', color:'var(--s5)', title:'자기주도적 탐구', en:'Self-directed Inquiry',
+    grow:'궁금증이 생기면 그 자리에서 한 가지라도 스스로 찾아 확인해보기.',
+    qs:[
+      { p:'수업 중 선생님이 “이건 시험엔 안 나와”라고 한 내용인데, 궁금증이 생겼다. 나라면?',
+        o:[ {t:'따로 찾아보거나 선생님께 질문해 끝까지 알아본다', s:4},
+            {t:'시험에 안 나오니 그냥 넘긴다', s:2},
+            {t:'일단 메모해두고 나중에 찾아본다', s:3},
+            {t:'금세 잊어버린다', s:1} ] },
+      { p:'폰 게임이나 앱을 하다가 “이건 대체 어떻게 만든 걸까?”가 궁금해졌다. 나라면?',
+        o:[ {t:'영상이나 글을 하나 찾아보고 만다', s:3},
+            {t:'직접 찾아보거나 비슷한 걸 만들어보려 시도한다', s:4},
+            {t:'궁금하긴 한데 찾아보진 않는다', s:2},
+            {t:'그냥 계속 게임만 한다', s:1} ] } ]}
+];
+const HEX = {s1:'#3B5BDB',s2:'#0CA678',s3:'#7048E8',s4:'#E8830C',s5:'#E03A5B'};
+const SIGBYKEY = Object.fromEntries(SIGNALS.map(s=>[s.key,s]));
+
+/* ---- flatten + shuffle (categories hidden, order randomized each load) ---- */
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const QUESTIONS=[];
+SIGNALS.forEach(s=>s.qs.forEach((q,qi)=>{
+  const opts=shuffle(q.o.map(o=>({...o})));            // shuffle options too
+  QUESTIONS.push({id:`${s.key}_${qi}`, sig:s.key, p:q.p, o:opts});
+}));
+shuffle(QUESTIONS);                                     // shuffle question order
+
+const answers={};
+QUESTIONS.forEach(q=>answers[q.id]=null);
+
+/* ---- render ---- */
+const qWrap=document.getElementById('questions');
+QUESTIONS.forEach((q,idx)=>{
+  const card=document.createElement('section');
+  card.className='qcard'; card.id='q'+(idx+1);
+  const opts=q.o.map(opt=>`
+    <button type="button" data-id="${q.id}" data-score="${opt.s}">
+      <span class="mk"></span><span>${opt.t}</span>
+    </button>`).join('');
+  card.innerHTML=`
+    <div class="qcard-head"><div class="qnum">${idx+1}</div><div class="q-text">${q.p}</div></div>
+    <div class="opts">${opts}</div>`;
+  qWrap.appendChild(card);
+});
+
+document.querySelectorAll('.opts button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const {id,score}=btn.dataset;
+    answers[id]=+score;
+    const group=btn.closest('.opts');
+    group.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    update();
+  });
+});
+
+/* ---- scoring (mapped back to hidden signals) ---- */
+function sigRaw(key){ let t=0; QUESTIONS.forEach(q=>{ if(q.sig===key && answers[q.id]!=null) t+=answers[q.id]; }); return t; } // 0..8
+function sigFrac(key){ const r=sigRaw(key); return Math.max(0,Math.min(1,(r-2)/6)); }
+function answeredCount(){ return Object.values(answers).filter(v=>v!==null).length; }
+
+/* ---- radar ---- */
+function radarSVG(size, fracs, opts={}){
+  const cx=size/2, cy=size/2, R=size*(opts.labels?0.355:0.40);
+  const pt=(i,f)=>{ const a=(-90+i*72)*Math.PI/180; return [cx+R*f*Math.cos(a), cy+R*f*Math.sin(a)]; };
+  let grid=''; [0.25,0.5,0.75,1].forEach(g=>{ const p=SIGNALS.map((_,i)=>pt(i,g).join(',')).join(' '); grid+=`<polygon points="${p}" fill="none" stroke="${opts.grid||'#E0E0E0'}" stroke-width="1"/>`; });
+  let spokes=''; SIGNALS.forEach((_,i)=>{ const [x,y]=pt(i,1); spokes+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${opts.grid||'#E0E0E0'}" stroke-width="1"/>`; });
+  const poly=SIGNALS.map((s,i)=>pt(i,Math.max(0.001,fracs[i])).join(',')).join(' ');
+  let dots=''; SIGNALS.forEach((s,i)=>{ const [x,y]=pt(i,Math.max(0.001,fracs[i])); dots+=`<circle cx="${x}" cy="${y}" r="${opts.dot||3}" fill="${HEX[s.key]}"/>`; });
+  let labels='';
+  if(opts.labels){ SIGNALS.forEach((s,i)=>{ const [x,y]=pt(i,1.13);
+      labels+=`<circle cx="${x}" cy="${y}" r="${(opts.fs||13)+3}" fill="${HEX[s.key]}"/>`;
+      labels+=`<text x="${x}" y="${y+1}" font-size="${(opts.fs||13)+2}" font-weight="800" fill="#fff" text-anchor="middle" dominant-baseline="middle">${s.num}</text>`; }); }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="사고 나침반">
+    ${grid}${spokes}<polygon points="${poly}" fill="${opts.fill||'rgba(59,91,219,.18)'}" stroke="${opts.stroke||'#3B5BDB'}" stroke-width="2" stroke-linejoin="round"/>${dots}${labels}</svg>`;
+}
+
+function update(){
+  const fracs=SIGNALS.map(s=>sigFrac(s.key));
+  document.getElementById('miniRadar').innerHTML=radarSVG(86,fracs,{grid:'#D9D8D1',fill:'rgba(59,91,219,.16)',stroke:'#3B5BDB',dot:2.4});
+  const n=answeredCount();
+  document.getElementById('answered').textContent=n;
+  document.getElementById('progFill').style.width=(n/10*100)+'%';
+  document.getElementById('abStatus').innerHTML = n<10 ? `<b>${n}</b>개 응답 · 10개 모두 답하면 결과가 열립니다` : `<b>완료!</b> 결과 보기를 눌러 나의 나침반을 확인하세요`;
+  document.getElementById('resultBtn').disabled = n<10;
+  document.getElementById('progLabel').textContent = n<10 ? '상황에 답할수록 나침반이 채워집니다.' : '나침반이 완성됐어요.';
+}
+
+const LV = raw => raw>=7 ? {t:'강함',c:'#0CA678'} : raw>=5 ? {t:'자라는 중',c:'#E8830C'} : {t:'키울 여지',c:'#6E7390'};
+function totalLevel(total){
+  if(total>=32) return {k:'창의·융합형 사고가 뚜렷한 단계', d:'다섯 신호가 고르게, 또는 강하게 살아 있습니다. 지금의 사고 습관을 더 어려운 문제에 적용해볼 때입니다.'};
+  if(total>=23) return {k:'융합형 사고가 자라는 단계', d:'여러 신호가 이미 깨어 있습니다. 약한 축 한두 개를 의식적으로 연습하면 빠르게 균형이 잡힙니다.'};
+  return {k:'지금부터 키워가면 좋은 단계', d:'신호의 씨앗은 이미 있습니다. 아래 가장 약한 축의 작은 습관 하나부터 시작해보세요.'};
+}
+
+document.getElementById('resultBtn').addEventListener('click',()=>{
+  const raws=SIGNALS.map(s=>sigRaw(s.key));
+  const total=raws.reduce((a,b)=>a+b,0);
+  const fracs=SIGNALS.map(s=>sigFrac(s.key));
+  const maxI=raws.indexOf(Math.max(...raws));
+  const minI=raws.indexOf(Math.min(...raws));
+  const tl=totalLevel(total);
+  const flat = Math.max(...raws)===Math.min(...raws);
+  const calloutB = flat
+    ? `<div class="callout"><span class="ci" style="background:rgba(255,255,255,.16);color:#fff">다음 한 걸음</span>
+         <span class="cb">다섯 신호가 균형을 이뤘습니다. 가장 끌리는 신호 하나를 골라 더 깊이 밀어붙여보세요.</span></div>`
+    : `<div class="callout"><span class="ci" style="background:rgba(255,255,255,.16);color:#fff">키울 한 가지</span>
+         <span class="cb"><b>${SIGNALS[minI].num}. ${SIGNALS[minI].title}</b> — ${SIGNALS[minI].grow}</span></div>`;
+  const rows=SIGNALS.map((s,i)=>{ const lv=LV(raws[i]); return `<div class="row">
+      <div class="rn" style="background:${s.color}">${s.num}</div>
+      <div class="rname">${s.title}</div>
+      <div class="rbar"><i style="width:${fracs[i]*100}%;background:${s.color}"></i></div>
+      <div class="rscore"><span class="sc">${raws[i]}<em>/8</em></span><span class="lv" style="background:${lv.c}">${lv.t}</span></div>
+    </div>`; }).join('');
+  const res=document.getElementById('result');
+  res.innerHTML=`
+    <div class="result-card">
+      <div class="rk">나의 사고 나침반</div>
+      <h2>${tl.k}</h2>
+      <div class="total">합계 <b>${total}</b> / 40점</div>
+      <p class="reveal">방금 답한 10개 상황은 아래 다섯 가지 융합 사고 신호를 비춰본 것입니다.</p>
+      <div class="bigradar">${radarSVG(280,fracs,{grid:'rgba(255,255,255,.18)',fill:'rgba(255,255,255,.14)',stroke:'#fff',dot:4,labels:true,fs:13})}</div>
+      <div class="callouts">
+        <div class="callout"><span class="ci" style="background:${SIGNALS[maxI].color};color:#fff">가장 강한 신호</span>
+          <span class="cb"><b>${SIGNALS[maxI].num}. ${SIGNALS[maxI].title}</b> — 이미 당신의 사고 무기입니다. 더 어려운 문제에서 의도적으로 꺼내 쓰세요.</span></div>
+        ${calloutB}
+      </div>
+    </div>
+    <div class="breakdown"><h3>다섯 가지 신호 · 신호별 상세</h3>
+      <div class="bh">① 강제 연결 · ② 지식의 전이 · ③ 다관점 종합 · ④ 비유적 추상화 · ⑤ 자기주도적 탐구</div>
+      ${rows}</div>
+    <div class="disc">${tl.d}<br><br>이 진단은 표준화된 ‘검사’가 아니라, 검증된 연구(OECD·PISA·Lattuca·이서영·권상집)가 가리키는 역량을 생활 장면으로 비춰보는 <b>관찰 도구</b>입니다. 점수보다 “어느 신호를 어떻게 키울지”의 단서로 활용하세요.</div>`;
+  res.classList.remove('hidden');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ res.querySelectorAll('.rbar > i').forEach((el,i)=>{ el.style.width=(fracs[i]*100)+'%'; }); }));
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  QUESTIONS.forEach(q=>answers[q.id]=null);
+  document.querySelectorAll('.opts button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('result').classList.add('hidden');
+  update(); window.scrollTo({top:0,behavior:'smooth'});
+});
+
+update();
+</script>
+
+
+</body></html>
